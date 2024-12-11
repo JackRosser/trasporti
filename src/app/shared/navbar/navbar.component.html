@@ -6,10 +6,16 @@
     *ngIf="toggleBackoffice"
     class="absolute top-[88px] left-0 z-50 bg-[#012F45] text-white w-full py-2 flex flex-col gap-2 backoffice"
   >
-    <a routerLink="/rivenditori" class="hover:bg-white hover:text-[#012F45]"
+    <a
+      (click)="activateToggle()"
+      routerLink="/rivenditori"
+      class="hover:bg-white hover:text-[#012F45]"
       >Inserisci Rivenditori</a
     >
-    <a routerLink="/mezzi" class="hover:bg-white hover:text-[#012F45]"
+    <a
+      (click)="activateToggle()"
+      routerLink="/mezzi"
+      class="hover:bg-white hover:text-[#012F45]"
       >Parco Mezzi</a
     >
   </div>

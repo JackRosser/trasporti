@@ -1,0 +1,46 @@
+{
+  "tram": [
+{
+  "foto": "img/tram/tram1.png",
+  "modello": "Tram 01"
+},
+{
+  "foto": "img/tram/tram2.png",
+  "modello": "Tram 02"
+},
+{
+  "foto": "img/tram/tram3.png",
+  "modello": "Tram 03"
+},
+{
+  "foto": "img/tram/tram4.png",
+  "modello": "Tram 04"
+},
+{
+  "foto": "img/tram/tram5.png",
+  "modello": "Tram 05"
+}
+  ],
+  "autobus": [
+    {
+      "foto": "img/autobuss/autobus1.png",
+  "modello": "Autobus 01"
+    },
+    {
+      "foto": "img/autobuss/autobus2.png",
+  "modello": "Autobus 02"
+    },
+    {
+      "foto": "img/autobuss/autobus3.png",
+  "modello": "Autobus 03"
+    },
+    {
+      "foto": "img/autobuss/autobus4.png",
+  "modello": "Autobus 04"
+    },
+    {
+      "foto": "img/autobuss/autobus5.png",
+  "modello": "Autobus 05"
+    }
+  ]
+}

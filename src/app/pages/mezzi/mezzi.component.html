@@ -1,1 +1,22 @@
-<p>mezzi works!</p>
+<div *ngIf="bus && tram" class="mt-2 ml-2 flex gap-2">
+  <button (click)="changeInActiveBus()" [class]="buttonClassBus">
+    Autobus
+  </button>
+  <button (click)="changeInActiveTram()" [class]="buttonClassTram">Tram</button>
+</div>
+<section class="p-2">
+  <div *ngIf="toggleBus" class="grid grid-cols-3 gap-2 text-center">
+    <div *ngFor="let mezzo of bus">
+      <img [src]="mezzo.foto" class="cursor-pointer hover:brightness-125" />
+      {{ mezzo.modello }}
+    </div>
+  </div>
+</section>
+<section class="p-2">
+  <div *ngIf="toggleTram" class="grid grid-cols-3 gap-2 text-center">
+    <div *ngFor="let mezzo of tram">
+      <img [src]="mezzo.foto" class="cursor-pointer hover:brightness-125" />
+      {{ mezzo.modello }}
+    </div>
+  </div>
+</section>
