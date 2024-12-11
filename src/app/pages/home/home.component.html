@@ -1,11 +1,20 @@
 <div class="w-full h-full flex flex-col lg:flex-row gap-2">
-  <a
-    [routerLink]="'/bus'"
-    class="bus w-full h-1/2 lg:w-1/2 lg:h-full cursor-pointer lg:opacity-80 lg:hover:opacity-100"
-  ></a>
-
-  <a
-    [routerLink]="'/tram'"
-    class="tram w-full h-1/2 lg:w-1/2 lg:h-full cursor-pointer lg:opacity-80 lg:hover:opacity-100"
-  ></a>
+  <section
+    class="bus w-full h-1/2 lg:w-1/2 lg:h-full cursor-pointer lg:opacity-80 lg:hover:opacity-100 flex justify-center items-center"
+  >
+    <button
+      class="bg-[#F10120] py-3 px-5 rounded-md text-white shadow-md hover:scale-110 hover:px-10 hover:py-8 transition-all duration-300 active:bg-white active:text-[#F10120]"
+    >
+      <a [routerLink]="'/bus'" class="cursor-pointer">Acquista il biglietto</a>
+    </button>
+  </section>
+  <section
+    class="tram w-full h-1/2 lg:w-1/2 lg:h-full cursor-pointer lg:opacity-80 lg:hover:opacity-100 flex justify-center items-center"
+  >
+    <button
+      class="bg-[#F10120] py-3 px-5 rounded-md text-white shadow-md hover:scale-110 hover:px-10 hover:py-8 transition-all duration-300 active:bg-white active:text-[#F10120]"
+    >
+      <a [routerLink]="'/tram'" class="cursor-pointer">Acquista il biglietto</a>
+    </button>
+  </section>
 </div>

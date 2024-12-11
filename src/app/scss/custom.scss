@@ -8,4 +8,14 @@ main {
   width: 100vw;
   top: 88px;
   height: calc(100vh - 88px);
+  animation: appear 1s;
+}
+
+@keyframes appear {
+  from {
+    opacity: 0;
+  }
+  to {
+    opacity: 100;
+  }
 }
