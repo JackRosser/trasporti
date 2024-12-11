@@ -6,5 +6,15 @@ import { Component } from '@angular/core';
   styleUrl: './bus.component.scss'
 })
 export class BusComponent {
+  formData = {
+    date: '',
+    route: '',
+    people: 1
+  };
 
+
+  onSubmit(value: any) {
+    console.log('Form inviato:', value);
+
+  }
 }

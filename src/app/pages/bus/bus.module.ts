@@ -3,6 +3,7 @@ import { CommonModule } from '@angular/common';
 
 import { BusRoutingModule } from './bus-routing.module';
 import { BusComponent } from './bus.component';
+import { FormsModule } from '@angular/forms';
 
 
 @NgModule({
@@ -11,7 +12,8 @@ import { BusComponent } from './bus.component';
   ],
   imports: [
     CommonModule,
-    BusRoutingModule
+    BusRoutingModule,
+    FormsModule
   ]
 })
 export class BusModule { }

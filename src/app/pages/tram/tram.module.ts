@@ -3,6 +3,7 @@ import { CommonModule } from '@angular/common';
 
 import { TramRoutingModule } from './tram-routing.module';
 import { TramComponent } from './tram.component';
+import { FormsModule } from '@angular/forms';
 
 
 @NgModule({
@@ -11,7 +12,8 @@ import { TramComponent } from './tram.component';
   ],
   imports: [
     CommonModule,
-    TramRoutingModule
+    TramRoutingModule,
+    FormsModule
   ]
 })
 export class TramModule { }
