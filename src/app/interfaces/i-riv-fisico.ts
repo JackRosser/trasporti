@@ -1,7 +1,8 @@
-import { iRivenditore } from "./i-rivenditore";
+import { iRivenditore } from './i-rivenditore';
 
-export interface iRivFisico extends iRivenditore{
-  giornoChiusura: Date;
-  oraApertura: Date;
-  oraChiusura: Date;
+export interface iRivFisico extends iRivenditore {
+  giornoChiusura: String;
+  oraApertura: String;
+  oraChiusura: String;
+  tipo: String;
 }
