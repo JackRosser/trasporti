@@ -9,6 +9,8 @@ main {
   top: 88px;
   height: calc(100vh - 88px);
   animation: appear 1s;
+  overflow: auto;
+  background-color: #cbd5e1;
 }
 
 @keyframes appear {
@@ -18,4 +20,8 @@ main {
   to {
     opacity: 100;
   }
+}
+
+section {
+  animation: appear 1s;
 }

@@ -2,7 +2,7 @@
   <form
     #subscriptionForm="ngForm"
     (ngSubmit)="onSubmit(subscriptionForm.value)"
-    class="p-4 flex flex-col text-center border justify-center items-center shadow-md"
+    class="p-4 flex flex-col text-center border justify-center items-center shadow-md mt-[12rem] lg:mt-0 md:mt-[7rem]"
   >
     <!-- Tipo di Servizio -->
     <div class="mb-4">
@@ -73,7 +73,7 @@
       <label class="block text-sm font-medium mb-3 text-[1.5rem]">
         Periodicità
       </label>
-      <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-2">
+      <div class="grid grid-cols-2 lg:grid-cols-4 gap-2">
         <!-- Mensile -->
         <div class="flex flex-col bg-white p-2 gap-1">
           <h2 class="text-[1.2rem] text-[#F10120]">Mensile</h2>
@@ -150,11 +150,12 @@
         <!-- Annuale -->
         <div class="flex flex-col bg-white p-2 gap-1">
           <h2 class="text-[1.2rem] text-[#F10120]">Annuale</h2>
+          <p class="text-blue-500">Posti a sedere privilegiati</p>
           <p class="text-blue-500">Caffè offerto dal controllore</p>
           <p class="text-blue-500">Aria condizionata</p>
           <p class="text-blue-500">Wifi</p>
           <p class="text-green-600">Posto garantito<br />sempre e comunque</p>
-          <h3 class="text-[1.5rem]">99€</h3>
+          <h3 class="text-[1.5rem]">610€</h3>
           <button
             type="button"
             [ngClass]="{
