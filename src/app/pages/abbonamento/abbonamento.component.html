@@ -1,1 +1,182 @@
-<p>abbonamento works!</p>
+<section class="bg-slate-300 w-full h-full flex justify-center items-center">
+  <form
+    #subscriptionForm="ngForm"
+    (ngSubmit)="onSubmit(subscriptionForm.value)"
+    class="p-4 flex flex-col text-center border justify-center items-center shadow-md"
+  >
+    <!-- Tipo di Servizio -->
+    <div class="mb-4">
+      <div class="flex gap-4 justify-center">
+        <button
+          type="button"
+          [ngClass]="{
+            'bg-blue-500 text-white': formData.serviceType === 'tram',
+            'bg-gray-200 text-black': formData.serviceType !== 'tram'
+          }"
+          (click)="formData.serviceType = 'tram'"
+          class="px-4 py-2 rounded cursor-pointer hover:scale-105 transition-all duration-300"
+        >
+          Tram
+        </button>
+        <button
+          type="button"
+          [ngClass]="{
+            'bg-blue-500 text-white': formData.serviceType === 'autobus',
+            'bg-gray-200 text-black': formData.serviceType !== 'autobus'
+          }"
+          (click)="formData.serviceType = 'autobus'"
+          class="px-4 py-2 rounded cursor-pointer hover:scale-105 transition-all duration-300"
+        >
+          Autobus
+        </button>
+      </div>
+    </div>
+
+    <!-- Nome -->
+    <div class="grid grid-cols-1 md:grid-cols-2 gap-2">
+      <div class="mb-4">
+        <label
+          for="firstName"
+          class="block text-sm font-medium mb-3 text-[1.5rem]"
+          >Nome</label
+        >
+        <input
+          type="text"
+          id="firstName"
+          name="firstName"
+          [(ngModel)]="formData.firstName"
+          required
+          class="border rounded px-2 py-1 w-full outline-none"
+        />
+      </div>
+
+      <!-- Cognome -->
+      <div class="mb-4">
+        <label
+          for="lastName"
+          class="block text-sm font-medium mb-3 text-[1.5rem]"
+          >Cognome</label
+        >
+        <input
+          type="text"
+          id="lastName"
+          name="lastName"
+          [(ngModel)]="formData.lastName"
+          required
+          class="border rounded px-2 py-1 w-full outline-none"
+        />
+      </div>
+    </div>
+
+    <!-- Tipo di abbonamento -->
+    <div class="mb-4">
+      <label class="block text-sm font-medium mb-3 text-[1.5rem]">
+        Periodicità
+      </label>
+      <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-2">
+        <!-- Mensile -->
+        <div class="flex flex-col bg-white p-2 gap-1">
+          <h2 class="text-[1.2rem] text-[#F10120]">Mensile</h2>
+          <p><s>Posti a sedere prenotati</s></p>
+          <p><s>Clemenza del controllore</s></p>
+          <p><s>Aria condizionata</s></p>
+          <p><s>Wifi</s></p>
+          <p class="text-red-500">
+            Obbligo di cessione del posto<br />ad abbonati superiori
+          </p>
+          <h3 class="text-[1.5rem]">50€</h3>
+          <button
+            type="button"
+            [ngClass]="{
+              'bg-blue-500 text-white': formData.subscriptionType === 'mensile',
+              'bg-gray-200 text-black': formData.subscriptionType !== 'mensile'
+            }"
+            (click)="formData.subscriptionType = 'mensile'"
+            class="px-4 py-2 rounded cursor-pointer hover:scale-105 transition-all duration-300"
+          >
+            Acquista
+          </button>
+        </div>
+        <!-- Bimestrale -->
+        <div class="flex flex-col bg-white p-2 gap-1">
+          <h2 class="text-[1.2rem] text-[#F10120]">Bimestrale</h2>
+          <p><s>Posti a sedere prenotati</s></p>
+          <p><s>Clemenza del controllore</s></p>
+          <p class="text-blue-500">Aria condizionata</p>
+          <p><s>Wifi</s></p>
+          <p class="text-red-500">
+            Obbligo di cessione del posto<br />ad abbonati superiori
+          </p>
+          <h3 class="text-[1.5rem]">99€</h3>
+          <button
+            type="button"
+            [ngClass]="{
+              'bg-blue-500 text-white':
+                formData.subscriptionType === 'bimestrale',
+              'bg-gray-200 text-black':
+                formData.subscriptionType !== 'bimestrale'
+            }"
+            (click)="formData.subscriptionType = 'bimestrale'"
+            class="px-4 py-2 rounded cursor-pointer hover:scale-105 transition-all duration-300"
+          >
+            Acquista
+          </button>
+        </div>
+        <!-- Trimestrale -->
+        <div class="flex flex-col bg-white p-2 gap-1">
+          <h2 class="text-[1.2rem] text-[#F10120]">Trimestrale</h2>
+          <p class="text-blue-500">Posti a sedere prenotati</p>
+          <p class="text-blue-500">Clemenza del controllore</p>
+          <p class="text-blue-500">Aria condizionata</p>
+          <p><s>Wifi</s></p>
+          <p class="text-red-500">
+            Obbligo di cessione del posto<br />ad abbonati superiori
+          </p>
+          <h3 class="text-[1.5rem]">170€</h3>
+          <button
+            type="button"
+            [ngClass]="{
+              'bg-blue-500 text-white':
+                formData.subscriptionType === 'trimestrale',
+              'bg-gray-200 text-black':
+                formData.subscriptionType !== 'trimestrale'
+            }"
+            (click)="formData.subscriptionType = 'trimestrale'"
+            class="px-4 py-2 rounded cursor-pointer hover:scale-105 transition-all duration-300"
+          >
+            Acquista
+          </button>
+        </div>
+        <!-- Annuale -->
+        <div class="flex flex-col bg-white p-2 gap-1">
+          <h2 class="text-[1.2rem] text-[#F10120]">Annuale</h2>
+          <p class="text-blue-500">Caffè offerto dal controllore</p>
+          <p class="text-blue-500">Aria condizionata</p>
+          <p class="text-blue-500">Wifi</p>
+          <p class="text-green-600">Posto garantito<br />sempre e comunque</p>
+          <h3 class="text-[1.5rem]">99€</h3>
+          <button
+            type="button"
+            [ngClass]="{
+              'bg-blue-500 text-white': formData.subscriptionType === 'annuale',
+              'bg-gray-200 text-black': formData.subscriptionType !== 'annuale'
+            }"
+            (click)="formData.subscriptionType = 'annuale'"
+            class="px-4 py-2 rounded cursor-pointer hover:scale-105 transition-all duration-300"
+          >
+            Acquista
+          </button>
+        </div>
+      </div>
+    </div>
+
+    <!-- Submit -->
+    <button
+      type="submit"
+      [disabled]="!subscriptionForm.valid"
+      class="bg-blue-500 text-white px-4 py-2 rounded cursor-pointer hover:scale-110 hover:text-blue-500 hover:bg-white transition-all duration-300 mt-5"
+    >
+      Procedi con l'acquisto
+    </button>
+  </form>
+</section>

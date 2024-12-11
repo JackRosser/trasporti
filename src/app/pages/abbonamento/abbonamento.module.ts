@@ -3,6 +3,7 @@ import { CommonModule } from '@angular/common';
 
 import { AbbonamentoRoutingModule } from './abbonamento-routing.module';
 import { AbbonamentoComponent } from './abbonamento.component';
+import { FormsModule } from '@angular/forms';
 
 
 @NgModule({
@@ -11,7 +12,8 @@ import { AbbonamentoComponent } from './abbonamento.component';
   ],
   imports: [
     CommonModule,
-    AbbonamentoRoutingModule
+    AbbonamentoRoutingModule,
+    FormsModule
   ]
 })
 export class AbbonamentoModule { }
