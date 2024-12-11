@@ -4,10 +4,11 @@ import { RouterModule, Routes } from '@angular/router';
 const routes: Routes = [
   { path: '', redirectTo: 'home', pathMatch: 'full' },
   { path: 'home', loadChildren: () => import('./pages/home/home.module').then(m => m.HomeModule) },
-  { path: 'backoffice', loadChildren: () => import('./pages/backoffice/backoffice.module').then(m => m.BackofficeModule) },
   { path: 'bus', loadChildren: () => import('./pages/bus/bus.module').then(m => m.BusModule) },
   { path: 'tram', loadChildren: () => import('./pages/tram/tram.module').then(m => m.TramModule) },
-  { path: 'abbonamento', loadChildren: () => import('./pages/abbonamento/abbonamento.module').then(m => m.AbbonamentoModule) }
+  { path: 'abbonamento', loadChildren: () => import('./pages/abbonamento/abbonamento.module').then(m => m.AbbonamentoModule) },
+  { path: 'rivenditori', loadChildren: () => import('./pages/insert-rivenditori/insert-rivenditori.module').then(m => m.InsertRivenditoriModule) },
+  { path: 'mezzi', loadChildren: () => import('./pages/mezzi/mezzi.module').then(m => m.MezziModule) }
 ];
 
 

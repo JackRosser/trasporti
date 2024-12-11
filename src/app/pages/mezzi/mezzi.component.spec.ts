@@ -1,18 +1,18 @@
 import { ComponentFixture, TestBed } from '@angular/core/testing';
 
-import { BackofficeComponent } from './backoffice.component';
+import { MezziComponent } from './mezzi.component';
 
-describe('BackofficeComponent', () => {
-  let component: BackofficeComponent;
-  let fixture: ComponentFixture<BackofficeComponent>;
+describe('MezziComponent', () => {
+  let component: MezziComponent;
+  let fixture: ComponentFixture<MezziComponent>;
 
   beforeEach(async () => {
     await TestBed.configureTestingModule({
-      declarations: [BackofficeComponent]
+      declarations: [MezziComponent]
     })
     .compileComponents();
 
-    fixture = TestBed.createComponent(BackofficeComponent);
+    fixture = TestBed.createComponent(MezziComponent);
     component = fixture.componentInstance;
     fixture.detectChanges();
   });

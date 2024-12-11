@@ -7,4 +7,10 @@ import { Component } from '@angular/core';
 })
 export class NavbarComponent {
 
+  toggleBackoffice: boolean = false;
+
+  activateToggle():void {
+    this.toggleBackoffice = !this.toggleBackoffice
+  }
+
 }

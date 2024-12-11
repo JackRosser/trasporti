@@ -1,11 +1,11 @@
 import { NgModule } from '@angular/core';
 import { RouterModule, Routes } from '@angular/router';
-import { BackofficeComponent } from './backoffice.component';
+import { MezziComponent } from './mezzi.component';
 
-const routes: Routes = [{ path: '', component: BackofficeComponent }];
+const routes: Routes = [{ path: '', component: MezziComponent }];
 
 @NgModule({
   imports: [RouterModule.forChild(routes)],
   exports: [RouterModule]
 })
-export class BackofficeRoutingModule { }
+export class MezziRoutingModule { }
