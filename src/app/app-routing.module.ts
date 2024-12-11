@@ -8,7 +8,8 @@ const routes: Routes = [
   { path: 'tram', loadChildren: () => import('./pages/tram/tram.module').then(m => m.TramModule) },
   { path: 'abbonamento', loadChildren: () => import('./pages/abbonamento/abbonamento.module').then(m => m.AbbonamentoModule) },
   { path: 'rivenditori', loadChildren: () => import('./pages/insert-rivenditori/insert-rivenditori.module').then(m => m.InsertRivenditoriModule) },
-  { path: 'mezzi', loadChildren: () => import('./pages/mezzi/mezzi.module').then(m => m.MezziModule) }
+  { path: 'mezzi', loadChildren: () => import('./pages/mezzi/mezzi.module').then(m => m.MezziModule) },
+  { path: 'user', loadChildren: () => import('./pages/user/user.module').then(m => m.UserModule) }
 ];
 
 

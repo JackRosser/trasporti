@@ -1,1 +1,104 @@
-<p>insert-rivenditori works!</p>
+<section class="bg-slate-300 w-full h-full flex justify-center items-center">
+  <form
+    #locationForm="ngForm"
+    (ngSubmit)="onSubmit(locationForm.value)"
+    class="p-4 flex flex-col text-center border justify-center items-center shadow-md mt-[12rem] lg:mt-0 md:mt-[7rem]"
+  >
+    <!-- Tipo di Servizio -->
+    <div class="mb-4">
+      <label class="block text-sm font-medium mb-3 text-[1.5rem]">
+        Tipo di Servizio
+      </label>
+      <div class="flex gap-4 justify-center">
+        <button
+          type="button"
+          [ngClass]="{
+            'bg-blue-500 text-white': formData.serviceType === 'fisico',
+            'bg-gray-200 text-black': formData.serviceType !== 'fisico'
+          }"
+          (click)="formData.serviceType = 'fisico'"
+          class="px-4 py-2 rounded cursor-pointer hover:scale-105 transition-all duration-300"
+        >
+          Fisico
+        </button>
+        <button
+          type="button"
+          [ngClass]="{
+            'bg-blue-500 text-white': formData.serviceType === 'automatico',
+            'bg-gray-200 text-black': formData.serviceType !== 'automatico'
+          }"
+          (click)="formData.serviceType = 'automatico'"
+          class="px-4 py-2 rounded cursor-pointer hover:scale-105 transition-all duration-300"
+        >
+          Automatico
+        </button>
+      </div>
+    </div>
+
+    <!-- Campi aggiuntivi per Fisico -->
+    <div
+      *ngIf="formData.serviceType === 'fisico'"
+      class="grid grid-cols-1 md:grid-cols-2 gap-2 mb-4"
+    >
+      <!-- Nome -->
+      <div class="mb-4">
+        <label
+          for="physicalName"
+          class="block text-sm font-medium mb-3 text-[1.5rem]"
+        >
+          Nome
+        </label>
+        <input
+          type="text"
+          id="physicalName"
+          name="physicalName"
+          [(ngModel)]="formData.physicalName"
+          required
+          class="border rounded px-2 py-1 w-full outline-none"
+        />
+      </div>
+
+      <!-- Orari -->
+      <div class="mb-4">
+        <label
+          for="timeSlot"
+          class="block text-sm font-medium mb-3 text-[1.5rem]"
+        >
+          Orari
+        </label>
+        <input
+          type="text"
+          id="timeSlot"
+          name="timeSlot"
+          [(ngModel)]="formData.timeSlot"
+          required
+          class="border rounded px-2 py-1 w-full outline-none"
+        />
+      </div>
+    </div>
+
+    <!-- Zona -->
+    <div class="mb-4">
+      <label for="zone" class="block text-sm font-medium mb-3 text-[1.5rem]">
+        Zona
+      </label>
+      <input
+        type="text"
+        id="zone"
+        name="zone"
+        [(ngModel)]="formData.zone"
+        required
+        class="border rounded px-2 py-1 w-full outline-none"
+      />
+    </div>
+
+    <!-- Submit -->
+    <button
+      type="submit"
+      [disabled]="!locationForm.valid"
+      class="bg-blue-500 text-white px-4 py-2 rounded cursor-pointer hover:scale-110 hover:text-blue-500 hover:bg-white transition-all duration-300 mt-5"
+    >
+      Procedi
+    </button>
+  </form>
+</section>
