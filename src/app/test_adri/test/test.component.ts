@@ -63,17 +63,17 @@ export class TestComponent {
     // });
 
     // testgetMezzi
-    this.mezziSvc.getMezzi().subscribe((res) => console.log(res));
+    // this.mezziSvc.getMezzi().subscribe((res) => console.log(res));
 
     // test getMezzoById
-    this.mezziSvc.getMezzoById(54).subscribe((res) => {
+    this.mezziSvc.getMezzoById(1).subscribe((res) => {
       this.mezzo = res;
       console.log(res);
     });
   }
 
   inserisciTratta() {
-    // test postTratta (commentata se no inserisce continuamente)
+    // test postTratta
     this.tratteSvc.createTratta(this.tratta).subscribe();
   }
 
@@ -82,7 +82,7 @@ export class TestComponent {
   }
 
   cancellaTratta() {
-    this.tratteSvc.deleteTratta(99).subscribe();
+    this.tratteSvc.deleteTratta(103).subscribe();
   }
 
   // // test createRivenditoreFisico
@@ -99,12 +99,12 @@ export class TestComponent {
 
   // test crea mezzo
   creaMezzo() {
-    this.mezziSvc.createMezzo('tram', 150).subscribe();
+    this.mezziSvc.createMezzo('tram', 666).subscribe();
   }
 
   // test delete mezzo
   cancellaMezzo() {
-    this.mezziSvc.deleteMezzo(52).subscribe();
+    this.mezziSvc.deleteMezzo(103).subscribe();
   }
 
   modificaMezzo() {
