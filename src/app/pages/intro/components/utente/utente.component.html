@@ -1,0 +1,122 @@
+<ng-container *ngIf="showChoise">
+  <div class="w-full h-full flex flex-col lg:flex-row gap-2">
+    <section
+      class="w-full h-1/2 lg:w-1/2 lg:h-full cursor-pointer lg:opacity-80 lg:hover:opacity-100 flex justify-center items-center"
+    >
+      <button
+        class="bg-[#F10120] py-3 px-5 rounded-md text-white shadow-md hover:scale-110 hover:px-10 hover:py-8 transition-all duration-300 active:bg-white active:text-[#F10120]"
+      >
+        <a class="cursor-pointer" (click)="creaUtente()">Crea utente</a>
+      </button>
+    </section>
+    <section
+      class="w-full h-1/2 lg:w-1/2 lg:h-full cursor-pointer lg:opacity-80 lg:hover:opacity-100 flex justify-center items-center"
+    >
+      <button
+        class="bg-[#F10120] py-3 px-5 rounded-md text-white shadow-md hover:scale-110 hover:px-10 hover:py-8 transition-all duration-300 active:bg-white active:text-[#F10120]"
+      >
+        <a class="cursor-pointer" (click)="scegliUtente()">Scegli utente</a>
+      </button>
+    </section>
+  </div>
+</ng-container>
+
+<ng-container *ngIf="showCrea">
+  <h3 class="text-center pt-32 pb-5 text-3xl">Registra un nuovo utente</h3>
+  <section class="bg-slate-300 w-full flex justify-center items-center">
+    <form
+      #utenteForm="ngForm"
+      class="p-4 flex flex-col text-center border justify-center items-center shadow-md mt-[12rem] lg:mt-0 md:mt-[7rem]"
+    >
+      <!-- Tipo di Servizio -->
+      <div class="mb-4">
+        <label class="block text-sm font-medium mb-3 text-[1.5rem]">
+          Nuovo utente
+        </label>
+      </div>
+
+      <!-- Nome -->
+      <div class="mb-4">
+        <label for="nome" class="block text-sm font-medium mb-3 text-[1.5rem]">
+          Nome
+        </label>
+        <input
+          type="text"
+          id="nome"
+          name="nome"
+          [(ngModel)]="utente.nome"
+          required
+          class="border rounded px-2 py-1 w-full outline-none"
+        />
+      </div>
+
+      <div class="mb-4">
+        <label
+          for="physicalName"
+          class="block text-sm font-medium mb-3 text-[1.5rem]"
+        >
+          Cognome
+        </label>
+        <input
+          type="text"
+          id="cognome"
+          name="cognome"
+          [(ngModel)]="utente.cognome"
+          required
+          class="border rounded px-2 py-1 w-full outline-none"
+        />
+      </div>
+
+      <!-- Orari -->
+      <div class="mb-4">
+        <label for="email" class="block text-sm font-medium mb-3 text-[1.5rem]">
+          Orari
+        </label>
+        <input
+          type="text"
+          id="email"
+          name="email"
+          [(ngModel)]="utente.email"
+          required
+          class="border rounded px-2 py-1 w-full outline-none"
+        />
+      </div>
+
+      <!-- Zona -->
+      <div class="mb-4">
+        <label
+          for="dataNascita"
+          class="block text-sm font-medium mb-3 text-[1.5rem]"
+        >
+          Data di nascita (yyyy-MM-dd)
+        </label>
+        <input
+          type="text"
+          id="dataNascita"
+          name="dataNascita"
+          [(ngModel)]="utente.dataNascita"
+          required
+          class="border rounded px-2 py-1 w-full outline-none"
+        />
+      </div>
+
+      <!-- Submit -->
+      <button
+        type="submit"
+        [disabled]="!utenteForm.valid"
+        class="bg-blue-500 text-white px-4 py-2 rounded cursor-pointer hover:scale-110 hover:text-blue-500 hover:bg-white transition-all duration-300 mt-5"
+      >
+        Procedi
+      </button>
+    </form>
+  </section>
+</ng-container>
+
+<ng-container *ngIf="showScegli">
+  <select name="utente" id="utente" (change)="conferma($event)">
+    <option value="">-- scegli un utente --</option>
+    <option *ngFor="let utente of utenti" [value]="utente.id">
+      {{ utente.nome }} {{ utente.cognome }}
+    </option>
+  </select>
+</ng-container>

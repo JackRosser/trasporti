@@ -5,6 +5,7 @@ import { UtentiService } from '../../services/utenti.service';
 import { iRivenditore } from '../../interfaces/i-rivenditore';
 import { RivenditoriService } from '../../services/rivenditori.service';
 import { TessereService } from '../../services/tessere.service';
+import { ActivatedRoute } from '@angular/router';
 
 @Component({
   selector: 'app-user',
@@ -12,7 +13,7 @@ import { TessereService } from '../../services/tessere.service';
   styleUrl: './user.component.scss',
 })
 export class UserComponent implements OnInit {
-  utente: iUtente | null = null; // Utente con ID 52
+  utente!: iUtente; // Utente con ID 52
   tessera!: iTessera; // Tessera generata
   rivenditori!: iRivenditore[];
   constructor(
@@ -22,19 +23,14 @@ export class UserComponent implements OnInit {
   ) {}
 
   ngOnInit(): void {
-    // Recupera i dati dell'utente con ID 52
-    this.utentiService.getUtenteById(52).subscribe(
-      (utente) => {
-        this.utente = utente;
-        console.log('Utente recuperato:', utente);
+    this.utentiService.loggedUser$.subscribe((loggedUser) => {
+      if (loggedUser) {
+        this.utente = loggedUser;
         this.tessereSvc.getTesseraByUtente(this.utente).subscribe((res) => {
           if (res) this.tessera = res;
         });
-      },
-      (error) => {
-        console.error("Errore nel recupero dell'utente:", error);
       }
-    );
+    });
 
     this.rivendoriSvc.getRivenditori().subscribe((res) => {
       this.rivenditori = res;
@@ -67,7 +63,7 @@ export class UserComponent implements OnInit {
     if (this.utente) {
       this.tessereSvc
         .createTessera(this.rivenditori[random].id, this.utente.id)
-        .subscribe();
+        .subscribe((res) => this.utentiService.loggedUser$.next(this.utente));
     }
   }
 }

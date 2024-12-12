@@ -3,7 +3,11 @@ import { RouterModule, Routes } from '@angular/router';
 import { TestComponent } from './test_adri/test/test.component';
 
 const routes: Routes = [
-  { path: '', redirectTo: 'home', pathMatch: 'full' },
+  {
+    path: '',
+    loadChildren: () =>
+      import('./pages/intro/intro.module').then((m) => m.IntroModule),
+  },
   {
     path: 'home',
     loadChildren: () =>
@@ -43,9 +47,21 @@ const routes: Routes = [
     loadChildren: () =>
       import('./pages/user/user.module').then((m) => m.UserModule),
   },
+  {
+    path: 'inserimentoMezzi',
+    loadChildren: () =>
+      import('./pages/inserimento-mezzi/inserimento-mezzi.module').then(
+        (m) => m.InserimentoMezziModule
+      ),
+  },
+  {
+    path: 'insert-tratta',
+    loadChildren: () =>
+      import('./pages/insert-tratta/insert-tratta.module').then(
+        (m) => m.InsertTrattaModule
+      ),
+  },
   { path: 'test', component: TestComponent },
-  { path: 'inserimentoMezzi', loadChildren: () => import('./pages/inserimento-mezzi/inserimento-mezzi.module').then(m => m.InserimentoMezziModule) },
-  { path: 'insert-tratta', loadChildren: () => import('./pages/insert-tratta/insert-tratta.module').then(m => m.InsertTrattaModule) },
 ];
 
 @NgModule({

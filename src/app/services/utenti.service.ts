@@ -1,7 +1,7 @@
 import { HttpClient } from '@angular/common/http';
 import { Injectable } from '@angular/core';
 import { environment } from '../../environments/environment.development';
-import { map, Observable } from 'rxjs';
+import { BehaviorSubject, map, Observable } from 'rxjs';
 import { iUtente } from '../interfaces/i-utente';
 import { iRivenditore } from '../interfaces/i-rivenditore';
 import { iTratta } from '../interfaces/i-tratta';
@@ -13,6 +13,8 @@ export class UtentiService {
   constructor(private http: HttpClient) {}
 
   utentiUrl: string = environment.remoteUtenti;
+
+  loggedUser$ = new BehaviorSubject<iUtente | null>(null);
 
   public getUtenti(): Observable<iUtente[]> {
     return this.http.get<iUtente[]>(this.utentiUrl);
