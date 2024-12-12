@@ -2,6 +2,8 @@ import { Component, OnInit } from '@angular/core';
 import { iTessera } from '../../interfaces/i-tessera';
 import { iUtente } from '../../interfaces/i-utente';
 import { UtentiService } from '../../services/utenti.service';
+import { iRivenditore } from '../../interfaces/i-rivenditore';
+import { RivenditoriService } from '../../services/rivenditori.service';
 
 @Component({
   selector: 'app-user',
@@ -11,8 +13,11 @@ import { UtentiService } from '../../services/utenti.service';
 export class UserComponent implements OnInit {
   utente: iUtente | null = null; // Utente con ID 52
   tessera: Partial<iTessera> | null = null; // Tessera generata
-
-  constructor(private utentiService: UtentiService) {}
+  rivenditori!: iRivenditore[];
+  constructor(
+    private utentiService: UtentiService,
+    private rivendoriSvc: RivenditoriService
+  ) {}
 
   ngOnInit(): void {
     // Recupera i dati dell'utente con ID 52
@@ -25,6 +30,10 @@ export class UserComponent implements OnInit {
         console.error("Errore nel recupero dell'utente:", error);
       }
     );
+
+    this.rivendoriSvc.getRivenditori().subscribe((res) => {
+      this.rivenditori = res;
+    });
   }
 
   onRichiediTessera(): void {
@@ -50,6 +59,12 @@ export class UserComponent implements OnInit {
     console.log('Tessera generata:', this.tessera);
     alert(
       `Tessera generata con codice: ${codice}, validità: ${validita.toLocaleDateString()}`
+    );
+  }
+
+  generaTessera() {
+    let random: number = Math.floor(
+      Math.random() * (this.rivenditori.length + 1)
     );
   }
 }
