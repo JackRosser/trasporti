@@ -10,6 +10,7 @@ import { iMezzo } from '../../interfaces/i-mezzo';
 import { UtentiService } from '../../services/utenti.service';
 import { iUtente } from '../../interfaces/i-utente';
 import { TessereService } from '../../services/tessere.service';
+import { iTessera } from '../../interfaces/i-tessera';
 
 @Component({
   selector: 'app-test',
@@ -59,6 +60,8 @@ export class TestComponent {
     tessera: null,
     ruolo: 'utente',
   };
+
+  tesseraRinnovo!: iTessera;
 
   ngOnInit() {
     // test getTratte
@@ -124,9 +127,9 @@ export class TestComponent {
 
     this.tessereSvc.getTessere().subscribe((res) => console.log(res));
 
-    this.tessereSvc
-      .getTesseraByCodice('T-HSOJVAVDQY')
-      .subscribe((res) => console.log('tessera per codice', res));
+    this.tessereSvc.getTesseraByCodice('T-WMUEAD36KO').subscribe((res) => {
+      if (res) this.tesseraRinnovo = res;
+    });
   }
 
   inserisciTratta() {
@@ -204,5 +207,15 @@ export class TestComponent {
     this.tessereSvc
       .createTessera(this.rivenditoreById.id, this.utenteById1.id)
       .subscribe();
+  }
+
+  // test rinnovatessera
+  rinnovatessera() {
+    this.tessereSvc.rinnovaTessera(this.tesseraRinnovo).subscribe();
+  }
+
+  // test deletetessera
+  cancellatessera() {
+    this.tessereSvc.deleteTessera(this.tesseraRinnovo.id).subscribe();
   }
 }

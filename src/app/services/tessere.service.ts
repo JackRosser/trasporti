@@ -38,4 +38,12 @@ export class TessereService {
       utenteId: utenteId,
     });
   }
+
+  public rinnovaTessera(tessera: iTessera) {
+    return this.http.put(`${this.tessereUrl}/${tessera.id}`, tessera);
+  }
+
+  public deleteTessera(id: number) {
+    return this.http.delete(`${this.tessereUrl}/${id}`);
+  }
 }
