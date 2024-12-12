@@ -1,6 +1,8 @@
 import { Component, OnInit } from '@angular/core';
 import { MezziService } from '../../services/mezzi.service';
 import { iVeicolo } from '../../interfaces/frontend/i-veicolo';
+import { iMezzo } from '../../interfaces/i-mezzo';
+import { environment } from '../../../environments/environment.development';
 
 @Component({
   selector: 'app-mezzi',
@@ -10,8 +12,8 @@ import { iVeicolo } from '../../interfaces/frontend/i-veicolo';
 export class MezziComponent implements OnInit{
 
 
-  bus!: iVeicolo[]
-  tram!: iVeicolo[]
+  bus!: iMezzo[]
+  tram!: iMezzo[]
   toggleBus:boolean = true;
   toggleTram:boolean = false;
 
@@ -33,15 +35,27 @@ export class MezziComponent implements OnInit{
     this.toggleTram = !this.toggleTram
   }
 
+  busList: string[] = environment.busImages
+  tramList: string[] = environment.tramImages
+  randomIndexBus: number[] = []
+  randomIndexTram: number[] = []
+
+
   // ALLO START
   ngOnInit(): void {
     this.mezziSvc.bu$.subscribe(list => {
       this.bus = list
-      console.log(this.bus);
-
-    })
+      for (let i = 0; i < this.bus.length; i++) {
+        let randomNumBus:number = Math.floor(Math.random() * 4)
+        this.randomIndexBus.push(randomNumBus)
+      }
+   })
     this.mezziSvc.tram$.subscribe(list => {
       this.tram = list
+      for (let i = 0; i < this.tram.length; i++) {
+        let randomNumTram:number = Math.floor(Math.random() * 4)
+        this.randomIndexTram.push(randomNumTram)
+      }
     })
 
 
