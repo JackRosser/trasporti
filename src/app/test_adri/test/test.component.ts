@@ -38,7 +38,7 @@ export class TestComponent {
     giornoChiusura: 1,
     oraApertura: '10:00:00',
     oraChiusura: '20:00:00',
-    tipo: 'fisico',
+    tipo: 'RivFisico',
   };
 
   ngOnInit() {
@@ -56,14 +56,20 @@ export class TestComponent {
       }
     });
 
-    // // test getRivenditori
-    // this.rivenditoriSvc.getRivenditori().subscribe((res) => {
-    //   if (res) this.rivenditori = res;
-    //   console.log(this.rivenditori);
-    // });
+    // test getRivenditori
+    this.rivenditoriSvc.getRivenditori().subscribe((res) => {
+      if (res) this.rivenditori = res;
+      console.log(this.rivenditori);
+    });
+
+    // test getRivFisici
+    this.rivenditoriSvc.getRivFisici().subscribe((res) => console.log(res));
+
+    // test getRivAutomatici
+    this.rivenditoriSvc.getRivAutomatici().subscribe((res) => console.log(res));
 
     // testgetMezzi
-    // this.mezziSvc.getMezzi().subscribe((res) => console.log(res));
+    this.mezziSvc.getMezzi().subscribe((res) => console.log(res));
 
     // test getMezzoById
     this.mezziSvc.getMezzoById(1).subscribe((res) => {
@@ -86,16 +92,14 @@ export class TestComponent {
   }
 
   // // test createRivenditoreFisico
-  // creaRivenditoreFisico() {
-  //   // errore 500 empty_response
-  //   this.rivenditoriSvc.createRivenditoreFisico(this.rivFisico).subscribe();
-  // }
+  creaRivenditoreFisico() {
+    this.rivenditoriSvc.createRivenditoreFisico(this.rivFisico).subscribe();
+  }
 
   // // test creaRivenditoreAutomatico
-  // creaRivenditoreAutomatico() {
-  //   // da testare
-  //   this.rivenditoriSvc.createRivenditoreAutomatico().subscribe();
-  // }
+  creaRivenditoreAutomatico() {
+    this.rivenditoriSvc.createRivenditoreAutomatico().subscribe();
+  }
 
   // test crea mezzo
   creaMezzo() {

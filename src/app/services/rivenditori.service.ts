@@ -1,8 +1,9 @@
+import { iRivenditore } from './../interfaces/i-rivenditore';
 import { HttpClient } from '@angular/common/http';
 import { Injectable } from '@angular/core';
 import { environment } from '../../environments/environment.development';
-import { iRivenditore } from '../interfaces/i-rivenditore';
 import { map, Observable } from 'rxjs';
+import { iRivFisico } from '../interfaces/i-riv-fisico';
 
 @Injectable({
   providedIn: 'root',
@@ -28,6 +29,20 @@ export class RivenditoriService {
     );
   }
 
+  public getRivFisici(): Observable<iRivenditore[]> {
+    return this.getRivenditori().pipe(
+      map((rivenditori) => rivenditori.filter((r) => r.tipo === 'RivFisico'))
+    );
+  }
+
+  public getRivAutomatici(): Observable<iRivenditore[]> {
+    return this.getRivenditori().pipe(
+      map((rivenditori) =>
+        rivenditori.filter((r) => r.tipo === 'RivAutomatico')
+      )
+    );
+  }
+
   public createRivenditoreFisico(
     rivFisico: Partial<iRivenditore>
   ): Observable<iRivenditore> {
@@ -35,6 +50,8 @@ export class RivenditoriService {
   }
 
   public createRivenditoreAutomatico(): Observable<string> {
-    return this.http.post<string>(this.rivenditoriUrl, { tipo: 'automatico' });
+    return this.http.post<string>(this.rivenditoriUrl, {
+      tipo: 'RivAutomatico',
+    });
   }
 }
