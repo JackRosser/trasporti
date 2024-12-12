@@ -1,5 +1,5 @@
-import { iRivenditore } from "./i-rivenditore";
+import { iRivenditore } from './i-rivenditore';
 
-export interface iRivAutomatico extends iRivenditore{
+export interface iRivAutomatico extends iRivenditore {
   attivo: boolean;
 }
