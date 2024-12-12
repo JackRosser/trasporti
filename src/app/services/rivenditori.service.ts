@@ -4,6 +4,7 @@ import { Injectable } from '@angular/core';
 import { environment } from '../../environments/environment.development';
 import { map, Observable } from 'rxjs';
 import { iRivFisico } from '../interfaces/i-riv-fisico';
+import { iRivAutomatico } from '../interfaces/i-riv-automatico';
 
 @Injectable({
   providedIn: 'root',
@@ -53,5 +54,20 @@ export class RivenditoriService {
     return this.http.post<string>(this.rivenditoriUrl, {
       tipo: 'RivAutomatico',
     });
+  }
+
+  public updateRivFisico(rivFisico: iRivFisico) {
+    return this.http.put(`${this.rivenditoriUrl}/${rivFisico.id}`, rivFisico);
+  }
+
+  public updateRivAutomatico(rivAutomatico: iRivAutomatico) {
+    return this.http.put(
+      `${this.rivenditoriUrl}/${rivAutomatico.id}`,
+      rivAutomatico
+    );
+  }
+
+  public deleteRivenditore(id: number) {
+    return this.http.delete(`${this.rivenditoriUrl}/${id}`);
   }
 }

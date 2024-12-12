@@ -41,6 +41,9 @@ export class TestComponent {
     tipo: 'RivFisico',
   };
 
+  rivenditoreById!: iRivenditore;
+  rivenditoreById2!: iRivenditore;
+
   ngOnInit() {
     // test getTratte
     this.tratteSvc.getTratte().subscribe((res) => {
@@ -60,6 +63,18 @@ export class TestComponent {
     this.rivenditoriSvc.getRivenditori().subscribe((res) => {
       if (res) this.rivenditori = res;
       console.log(this.rivenditori);
+    });
+
+    // rivenditore fisico
+    this.rivenditoriSvc.getRivenditoreById(13).subscribe((res) => {
+      if (res) this.rivenditoreById = res;
+      console.log(this.rivenditoreById);
+    });
+
+    // rivenditore automatico
+    this.rivenditoriSvc.getRivenditoreById(8).subscribe((res) => {
+      if (res) this.rivenditoreById2 = res;
+      console.log(this.rivenditoreById2);
     });
 
     // test getRivFisici
@@ -99,6 +114,22 @@ export class TestComponent {
   // // test creaRivenditoreAutomatico
   creaRivenditoreAutomatico() {
     this.rivenditoriSvc.createRivenditoreAutomatico().subscribe();
+  }
+
+  modificaRivenditoreAutomatico() {
+    let riv: iRivAutomatico = this.rivenditoreById2 as iRivAutomatico;
+    riv.attivo = false;
+    this.rivenditoriSvc.updateRivAutomatico(riv).subscribe();
+  }
+
+  modificaRivenditoreFisico() {
+    let riv: iRivFisico = this.rivenditoreById as iRivFisico;
+    riv.giornoChiusura = 1;
+    this.rivenditoriSvc.updateRivFisico(riv).subscribe();
+  }
+
+  cancellaRivenditore() {
+    this.rivenditoriSvc.deleteRivenditore(52).subscribe();
   }
 
   // test crea mezzo
