@@ -4,6 +4,7 @@ import { iUtente } from '../../interfaces/i-utente';
 import { UtentiService } from '../../services/utenti.service';
 import { iRivenditore } from '../../interfaces/i-rivenditore';
 import { RivenditoriService } from '../../services/rivenditori.service';
+import { TessereService } from '../../services/tessere.service';
 
 @Component({
   selector: 'app-user',
@@ -12,11 +13,12 @@ import { RivenditoriService } from '../../services/rivenditori.service';
 })
 export class UserComponent implements OnInit {
   utente: iUtente | null = null; // Utente con ID 52
-  tessera: Partial<iTessera> | null = null; // Tessera generata
+  tessera!: iTessera; // Tessera generata
   rivenditori!: iRivenditore[];
   constructor(
     private utentiService: UtentiService,
-    private rivendoriSvc: RivenditoriService
+    private rivendoriSvc: RivenditoriService,
+    private tessereSvc: TessereService
   ) {}
 
   ngOnInit(): void {
@@ -25,6 +27,9 @@ export class UserComponent implements OnInit {
       (utente) => {
         this.utente = utente;
         console.log('Utente recuperato:', utente);
+        this.tessereSvc.getTesseraByUtente(this.utente).subscribe((res) => {
+          if (res) this.tessera = res;
+        });
       },
       (error) => {
         console.error("Errore nel recupero dell'utente:", error);
@@ -49,13 +54,6 @@ export class UserComponent implements OnInit {
     const validita = new Date();
     validita.setFullYear(validita.getFullYear() + 1);
 
-    // Crea la tessera
-    this.tessera = {
-      codice: codice,
-      validita: validita,
-      utente: this.utente,
-    };
-
     console.log('Tessera generata:', this.tessera);
     alert(
       `Tessera generata con codice: ${codice}, validità: ${validita.toLocaleDateString()}`
@@ -66,5 +64,10 @@ export class UserComponent implements OnInit {
     let random: number = Math.floor(
       Math.random() * (this.rivenditori.length + 1)
     );
+    if (this.utente) {
+      this.tessereSvc
+        .createTessera(this.rivenditori[random].id, this.utente.id)
+        .subscribe();
+    }
   }
 }
