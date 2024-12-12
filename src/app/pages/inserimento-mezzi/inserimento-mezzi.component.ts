@@ -10,10 +10,12 @@ import { eStato } from '../../interfaces/e-stato';
 })
 export class InserimentoMezziComponent implements OnInit {
   formData: {
+    tipo: string; // Aggiungi questa proprietà
     seatQuantity: number;
     readyToCirculate: string;
     code: string;
   } = {
+    tipo: '', // Inizializza come stringa vuota
     seatQuantity: 0,
     readyToCirculate: '',
     code: '',

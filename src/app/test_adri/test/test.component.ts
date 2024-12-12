@@ -156,9 +156,9 @@ export class TestComponent {
   }
 
   // test crea mezzo
-  /*creaMezzo() {
+  creaMezzo() {
     this.mezziSvc.createMezzo('tram', 666).subscribe();
-  }*/
+  }
 
   // test delete mezzo
   cancellaMezzo() {
