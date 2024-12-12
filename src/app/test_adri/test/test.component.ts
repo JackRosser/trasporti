@@ -11,6 +11,7 @@ import { UtentiService } from '../../services/utenti.service';
 import { iUtente } from '../../interfaces/i-utente';
 import { TessereService } from '../../services/tessere.service';
 import { iTessera } from '../../interfaces/i-tessera';
+import { BigliettiService } from '../../services/biglietti.service';
 
 @Component({
   selector: 'app-test',
@@ -23,7 +24,8 @@ export class TestComponent {
     private rivenditoriSvc: RivenditoriService,
     private mezziSvc: MezziService,
     private utentiSvc: UtentiService,
-    private tessereSvc: TessereService
+    private tessereSvc: TessereService,
+    private bigliettiSvc: BigliettiService
   ) {}
 
   tratte!: iTratta[];
@@ -91,7 +93,7 @@ export class TestComponent {
     });
 
     // rivenditore automatico
-    this.rivenditoriSvc.getRivenditoreById(8).subscribe((res) => {
+    this.rivenditoriSvc.getRivenditoreById(155).subscribe((res) => {
       if (res) this.rivenditoreById2 = res;
       console.log(this.rivenditoreById2);
     });
@@ -115,7 +117,7 @@ export class TestComponent {
     this.utentiSvc.getUtenti().subscribe((res) => console.log(res));
 
     // test getUtenteById
-    this.utentiSvc.getUtenteById(52).subscribe((res) => {
+    this.utentiSvc.getUtenteById(57).subscribe((res) => {
       if (res) this.utenteById1 = res;
       console.log(this.utenteById1);
 
@@ -125,11 +127,39 @@ export class TestComponent {
         .subscribe((res) => console.log('tessera utente', res));
     });
 
+    // test geet tessere
     this.tessereSvc.getTessere().subscribe((res) => console.log(res));
 
-    this.tessereSvc.getTesseraByCodice('T-WMUEAD36KO').subscribe((res) => {
-      if (res) this.tesseraRinnovo = res;
+    // test tessera per codice
+    this.tessereSvc.getTesseraByCodice('T-HSOJVAVDQY').subscribe((res) => {
+      if (res) {
+        this.tesseraRinnovo = res;
+        console.log('tessera per codice', res);
+        // test abbonamenti per tessera
+        // this.bigliettiSvc
+        //   .getAbbonamentiByTessera(this.tesseraRinnovo)
+        //   .subscribe((res) => console.log('abbonamenti per tessera:', res));
+      }
     });
+
+    // test get biglietti
+    this.bigliettiSvc.getBiglietti().subscribe((res) => console.log(res));
+
+    // get biglietti giornalieri
+    this.bigliettiSvc.getGiornalieri().subscribe((res) => console.log(res));
+
+    // get biglietti abbonamenti
+    this.bigliettiSvc.getAbbonamenti().subscribe((res) => console.log(res));
+
+    // get biglietto byId
+    this.bigliettiSvc
+      .getGiornalieroById(102)
+      .subscribe((res) => console.log('Giornaliero per id', res));
+
+    // get abbonamento byId
+    this.bigliettiSvc
+      .getAbbonamentoById(205)
+      .subscribe((res) => console.log('Abbonamento per id', res));
   }
 
   inserisciTratta() {
