@@ -1,9 +1,11 @@
-import { iTessera } from "./i-tessera";
+import { iTessera } from './i-tessera';
 
 export interface iUtente {
   id: number;
-  name: string;
+  nome: string;
   cognome: string;
   email: string;
-  tessera: iTessera;
+  dataNascita: string;
+  tessera: iTessera | null;
+  ruolo: string;
 }

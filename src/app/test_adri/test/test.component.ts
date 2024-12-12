@@ -7,6 +7,8 @@ import { iRivAutomatico } from '../../interfaces/i-riv-automatico';
 import { MezziService } from '../../services/mezzi.service';
 import { iRivenditore } from '../../interfaces/i-rivenditore';
 import { iMezzo } from '../../interfaces/i-mezzo';
+import { UtentiService } from '../../services/utenti.service';
+import { iUtente } from '../../interfaces/i-utente';
 
 @Component({
   selector: 'app-test',
@@ -17,7 +19,8 @@ export class TestComponent {
   constructor(
     private tratteSvc: TratteService,
     private rivenditoriSvc: RivenditoriService,
-    private mezziSvc: MezziService
+    private mezziSvc: MezziService,
+    private utentiSvc: UtentiService
   ) {}
 
   tratte!: iTratta[];
@@ -43,6 +46,17 @@ export class TestComponent {
 
   rivenditoreById!: iRivenditore;
   rivenditoreById2!: iRivenditore;
+
+  utenteById1!: iUtente;
+
+  newUtente: Partial<iUtente> = {
+    nome: 'Mario',
+    cognome: 'Rossi',
+    email: 'mario.rossi@example.com',
+    dataNascita: '1990-03-01',
+    tessera: null,
+    ruolo: 'utente',
+  };
 
   ngOnInit() {
     // test getTratte
@@ -90,6 +104,15 @@ export class TestComponent {
     this.mezziSvc.getMezzoById(1).subscribe((res) => {
       this.mezzo = res;
       console.log(res);
+    });
+
+    // test getUtenti
+    this.utentiSvc.getUtenti().subscribe((res) => console.log(res));
+
+    // test getUtenteById
+    this.utentiSvc.getUtenteById(74).subscribe((res) => {
+      if (res) this.utenteById1 = res;
+      console.log(this.utenteById1);
     });
   }
 
@@ -145,5 +168,21 @@ export class TestComponent {
   modificaMezzo() {
     this.mezzo.codice = 1000;
     this.mezziSvc.updateMezzo(this.mezzo).subscribe();
+  }
+
+  // test creautente
+  creaUtente() {
+    this.utentiSvc.createUtente(this.newUtente).subscribe();
+  }
+
+  // test modifica utente
+  modificaUtente() {
+    this.utenteById1.cognome = 'Biondi';
+    this.utentiSvc.updateUtente(this.utenteById1).subscribe();
+  }
+
+  // test cancella utente
+  cancellaUtente() {
+    this.utentiSvc.deleteUtente(70).subscribe();
   }
 }
