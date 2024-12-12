@@ -1,5 +1,6 @@
 import { Component } from '@angular/core';
-import { HttpClient } from '@angular/common/http';
+import { TratteService } from '../../services/tratte.service';
+import { iTratta } from '../../interfaces/i-tratta';
 
 @Component({
   selector: 'app-insert-tratta',
@@ -10,15 +11,18 @@ export class InsertTrattaComponent {
   formData: {
     departure: string;
     destination: string;
-    duration: number | null;
+    duration: string;
   } = {
     departure: '',
     destination: '',
-    duration: null,
+    duration: '',
   };
 
-  constructor(private http: HttpClient) {}
+  tratte: iTratta[] = []; // Array per memorizzare le tratte recuperate dal server
 
+  constructor(private tratteService: TratteService) {}
+
+  // Metodo per inviare il form
   onSubmit(formValue: any): void {
     if (!formValue.departure || !formValue.destination || !formValue.duration) {
       alert(
@@ -27,20 +31,35 @@ export class InsertTrattaComponent {
       return;
     }
 
-    if (formValue.duration <= 0) {
-      alert('La durata deve essere un valore positivo.');
-      return;
-    }
+    const tratta: Partial<iTratta> = {
+      partenza: formValue.departure,
+      capolinea: formValue.destination,
+      durata: formValue.duration,
+    };
 
-    // Invia i dati al server
-    this.http.post('http://localhost:8000/tratte', formValue).subscribe(
+    this.tratteService.createTratta(tratta).subscribe(
       (response) => {
         console.log('Risposta dal server:', response);
         alert('Tratta aggiunta con successo!');
+        this.getTratte(); // Aggiorna la lista delle tratte
       },
       (error) => {
         console.error('Errore:', error);
         alert("Errore durante l'aggiunta della tratta.");
+      }
+    );
+  }
+
+  // Metodo per recuperare tutte le tratte
+  getTratte(): void {
+    this.tratteService.getTratte().subscribe(
+      (response) => {
+        console.log('Tratte recuperate:', response);
+        this.tratte = response;
+      },
+      (error) => {
+        console.error('Errore durante il recupero delle tratte:', error);
+        alert('Errore durante il recupero delle tratte.');
       }
     );
   }
