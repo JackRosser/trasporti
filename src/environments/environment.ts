@@ -9,4 +9,6 @@ export const environment = {
   remotePercorrenze: 'http://localhost:8000/percorrenze',
   remoteUtenti: 'http://localhost:8000/utenti',
   remoteStatiMezzo: 'http://localhost:8000/stati-mezzo',
+  tramImages: ["img/tram/tram1.png","img/tram/tram2.png","img/tram/tram3.png","img/tram/tram4.png","img/tram/tram5.png"],
+  busImages: ["img/autobuss/autobus1.png","img/autobuss/autobus2.png","img/autobuss/autobus3.png","img/autobuss/autobus4.png","img/autobuss/autobus5.png"]
 };

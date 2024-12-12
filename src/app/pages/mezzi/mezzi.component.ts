@@ -1,6 +1,8 @@
 import { Component, OnInit } from '@angular/core';
 import { MezziService } from '../../services/mezzi.service';
 import { iVeicolo } from '../../interfaces/frontend/i-veicolo';
+import { iMezzo } from '../../interfaces/i-mezzo';
+import { environment } from '../../../environments/environment.development';
 
 @Component({
   selector: 'app-mezzi',
@@ -10,8 +12,8 @@ import { iVeicolo } from '../../interfaces/frontend/i-veicolo';
 export class MezziComponent implements OnInit{
 
 
-  bus!: iVeicolo[]
-  tram!: iVeicolo[]
+  bus!: iMezzo[]
+  tram!: iMezzo[]
   toggleBus:boolean = true;
   toggleTram:boolean = false;
 
@@ -33,15 +35,22 @@ export class MezziComponent implements OnInit{
     this.toggleTram = !this.toggleTram
   }
 
+  busList: string[] = environment.busImages
+  tramList: string[] = environment.tramImages
+
+  randomNumBus: number = Math.floor(Math.random() * this.busList.length)
+  randomNumTram: number = Math.floor(Math.random() * this.tramList.length)
+
   // ALLO START
   ngOnInit(): void {
     this.mezziSvc.bu$.subscribe(list => {
       this.bus = list
-      console.log(this.bus);
+      console.log("BUS " + this.bus);
 
     })
     this.mezziSvc.tram$.subscribe(list => {
       this.tram = list
+      console.log("TRAM " + this.tram);
     })
 
 
