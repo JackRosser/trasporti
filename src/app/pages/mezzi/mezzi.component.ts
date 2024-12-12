@@ -37,20 +37,25 @@ export class MezziComponent implements OnInit{
 
   busList: string[] = environment.busImages
   tramList: string[] = environment.tramImages
+  randomIndexBus: number[] = []
+  randomIndexTram: number[] = []
 
-  randomNumBus: number = Math.floor(Math.random() * this.busList.length)
-  randomNumTram: number = Math.floor(Math.random() * this.tramList.length)
 
   // ALLO START
   ngOnInit(): void {
     this.mezziSvc.bu$.subscribe(list => {
       this.bus = list
-      console.log("BUS " + this.bus);
-
-    })
+      for (let i = 0; i < this.bus.length; i++) {
+        let randomNumBus:number = Math.floor(Math.random() * 4)
+        this.randomIndexBus.push(randomNumBus)
+      }
+   })
     this.mezziSvc.tram$.subscribe(list => {
       this.tram = list
-      console.log("TRAM " + this.tram);
+      for (let i = 0; i < this.tram.length; i++) {
+        let randomNumTram:number = Math.floor(Math.random() * 4)
+        this.randomIndexTram.push(randomNumTram)
+      }
     })
 
 

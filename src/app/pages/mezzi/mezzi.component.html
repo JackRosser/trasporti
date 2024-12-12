@@ -6,9 +6,9 @@
 </div>
 <section class="p-2">
   <div *ngIf="toggleBus" class="grid grid-cols-3 gap-2 text-center">
-    <div *ngFor="let mezzo of bus">
+    <div *ngFor="let mezzo of bus; let i = index">
       <img
-        [src]="busList[randomNumBus]"
+        [src]="busList[randomIndexBus[i]]"
         class="cursor-pointer hover:brightness-125"
       />
       {{ mezzo.codice }}
@@ -17,9 +17,9 @@
 </section>
 <section class="p-2">
   <div *ngIf="toggleTram" class="grid grid-cols-3 gap-2 text-center">
-    <div *ngFor="let mezzo of tram">
+    <div *ngFor="let mezzo of tram; let i = index">
       <img
-        [src]="tramList[randomNumTram]"
+        [src]="tramList[randomIndexTram[i]]"
         class="cursor-pointer hover:brightness-125"
       />
       {{ mezzo.codice }}
