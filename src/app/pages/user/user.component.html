@@ -1,16 +1,18 @@
 <div>
-  <h3 class="text-[40px]">Utente: nome utente</h3>
+  <h3 class="text-[40px]">Utente: {{ utente?.nome }} {{ utente?.cognome }}</h3>
 
   <ul>
-    <li>Nome</li>
-    <li>Cognome</li>
-    <li>Data di nascita</li>
-    <li>Email</li>
+    <li>Nome: {{ utente?.nome }}</li>
+    <li>Cognome: {{ utente?.cognome }}</li>
+    <li>Data di nascita: {{ utente?.dataNascita | date }}</li>
+    <li>Email: {{ utente?.email }}</li>
   </ul>
 
   <h4>Tipo di tessera</h4>
 
-  <p>Tessera</p>
+  <p *ngIf="tessera">
+    Tessera: {{ tessera.codice }} (Validità: {{ tessera.validita | date }})
+  </p>
 
   <div class="text-center">
     <h5 class="text-3xl">
@@ -19,11 +21,12 @@
     <img
       class="rounded-xl"
       src="https://hatchgreencoaches.co.uk/mobile/images/travel-card/bus-travel-card-taunton.jpg"
-      alt=""
+      alt="Tessera"
     />
 
     <button
-      type="submit"
+      type="button"
+      (click)="onRichiediTessera()"
       class="bg-blue-500 text-white px-4 py-2 rounded cursor-pointer hover:scale-110 hover:text-blue-500 hover:bg-white transition-all duration-300 mt-5"
     >
       Richiedi
