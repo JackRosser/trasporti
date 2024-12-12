@@ -38,8 +38,11 @@ export class TestComponent {
     giornoChiusura: 1,
     oraApertura: '10:00:00',
     oraChiusura: '20:00:00',
-    tipo: 'fisico',
+    tipo: 'RivFisico',
   };
+
+  rivenditoreById!: iRivenditore;
+  rivenditoreById2!: iRivenditore;
 
   ngOnInit() {
     // test getTratte
@@ -56,14 +59,32 @@ export class TestComponent {
       }
     });
 
-    // // test getRivenditori
-    // this.rivenditoriSvc.getRivenditori().subscribe((res) => {
-    //   if (res) this.rivenditori = res;
-    //   console.log(this.rivenditori);
-    // });
+    // test getRivenditori
+    this.rivenditoriSvc.getRivenditori().subscribe((res) => {
+      if (res) this.rivenditori = res;
+      console.log(this.rivenditori);
+    });
+
+    // rivenditore fisico
+    this.rivenditoriSvc.getRivenditoreById(13).subscribe((res) => {
+      if (res) this.rivenditoreById = res;
+      console.log(this.rivenditoreById);
+    });
+
+    // rivenditore automatico
+    this.rivenditoriSvc.getRivenditoreById(8).subscribe((res) => {
+      if (res) this.rivenditoreById2 = res;
+      console.log(this.rivenditoreById2);
+    });
+
+    // test getRivFisici
+    this.rivenditoriSvc.getRivFisici().subscribe((res) => console.log(res));
+
+    // test getRivAutomatici
+    this.rivenditoriSvc.getRivAutomatici().subscribe((res) => console.log(res));
 
     // testgetMezzi
-    // this.mezziSvc.getMezzi().subscribe((res) => console.log(res));
+    this.mezziSvc.getMezzi().subscribe((res) => console.log(res));
 
     // test getMezzoById
     this.mezziSvc.getMezzoById(1).subscribe((res) => {
@@ -86,16 +107,30 @@ export class TestComponent {
   }
 
   // // test createRivenditoreFisico
-  // creaRivenditoreFisico() {
-  //   // errore 500 empty_response
-  //   this.rivenditoriSvc.createRivenditoreFisico(this.rivFisico).subscribe();
-  // }
+  creaRivenditoreFisico() {
+    this.rivenditoriSvc.createRivenditoreFisico(this.rivFisico).subscribe();
+  }
 
   // // test creaRivenditoreAutomatico
-  // creaRivenditoreAutomatico() {
-  //   // da testare
-  //   this.rivenditoriSvc.createRivenditoreAutomatico().subscribe();
-  // }
+  creaRivenditoreAutomatico() {
+    this.rivenditoriSvc.createRivenditoreAutomatico().subscribe();
+  }
+
+  modificaRivenditoreAutomatico() {
+    let riv: iRivAutomatico = this.rivenditoreById2 as iRivAutomatico;
+    riv.attivo = false;
+    this.rivenditoriSvc.updateRivAutomatico(riv).subscribe();
+  }
+
+  modificaRivenditoreFisico() {
+    let riv: iRivFisico = this.rivenditoreById as iRivFisico;
+    riv.giornoChiusura = 1;
+    this.rivenditoriSvc.updateRivFisico(riv).subscribe();
+  }
+
+  cancellaRivenditore() {
+    this.rivenditoriSvc.deleteRivenditore(52).subscribe();
+  }
 
   // test crea mezzo
   creaMezzo() {
