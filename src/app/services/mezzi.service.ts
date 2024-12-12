@@ -6,13 +6,12 @@ import { BehaviorSubject, map, Observable, tap } from 'rxjs';
 import { environment } from '../../environments/environment.development';
 import { iVeicolo } from '../interfaces/frontend/i-veicolo';
 
-
 @Injectable({
   providedIn: 'root',
 })
 export class MezziService {
   constructor(private http: HttpClient) {
-    this.getBus(), this.getTram()
+    this.getBus(), this.getTram();
   }
 
   private tramBh = new BehaviorSubject<iMezzo[]>([]);
@@ -23,35 +22,31 @@ export class MezziService {
   private busBh = new BehaviorSubject<iMezzo[]>([]);
   bu$ = this.busBh.asObservable();
 
-  // private getTram(): void {
-  //   this.http.get<iVeicolo[]>(environment.tramUrl).subscribe((list) => {
-  //     this.tramBh.next(list);
-  //   });
-  // }
-  // private getBus(): void {
-  //   this.http.get<iVeicolo[]>(environment.busUrl).subscribe((list) => {
-  //     this.busBh.next(list);
-  //   });
-  // }
-
   // crud nuove
   public getMezzi(): Observable<iMezzo[]> {
     return this.http.get<iMezzo[]>(this.mezziUrl);
   }
 
-  public getBus(): void{
-    this.getMezzi().pipe(tap(list => {
-      let bus: iMezzo[] = list.filter(m => m.tipo === "Autobus")
-      this.busBh.next(bus)
-    })).subscribe()
-    }
-  public getTram(): void{
-    this.getMezzi().pipe(tap(list => {
-      let tram: iMezzo[] = list.filter(m => m.tipo === "Tram")
-      this.tramBh.next(tram)
-    })).subscribe()
-    }
-
+  public getBus(): void {
+    this.getMezzi()
+      .pipe(
+        tap((list) => {
+          let bus: iMezzo[] = list.filter((m) => m.tipo === 'Autobus');
+          this.busBh.next(bus);
+        })
+      )
+      .subscribe();
+  }
+  public getTram(): void {
+    this.getMezzi()
+      .pipe(
+        tap((list) => {
+          let tram: iMezzo[] = list.filter((m) => m.tipo === 'Tram');
+          this.tramBh.next(tram);
+        })
+      )
+      .subscribe();
+  }
 
   public getMezzoById(id: number): Observable<iMezzo> {
     return this.getMezzi().pipe(
