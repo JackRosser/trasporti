@@ -3,6 +3,8 @@ import { Injectable } from '@angular/core';
 import { environment } from '../../environments/environment.development';
 import { map, Observable } from 'rxjs';
 import { iUtente } from '../interfaces/i-utente';
+import { iRivenditore } from '../interfaces/i-rivenditore';
+import { iTratta } from '../interfaces/i-tratta';
 
 @Injectable({
   providedIn: 'root',

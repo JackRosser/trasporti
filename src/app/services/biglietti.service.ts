@@ -6,6 +6,8 @@ import { iBiglietto } from '../interfaces/i-biglietto';
 import { iGiornaliero } from '../interfaces/i-giornaliero';
 import { iAbbonamento } from '../interfaces/i-abbonamento';
 import { iTessera } from '../interfaces/i-tessera';
+import { iRivenditore } from '../interfaces/i-rivenditore';
+import { iTratta } from '../interfaces/i-tratta';
 
 @Injectable({
   providedIn: 'root',
@@ -50,6 +52,7 @@ export class BigliettiService {
   }
 
   public getAbbonamentiByTessera(
+    // da verificare
     tessera: iTessera
   ): Observable<iAbbonamento[]> {
     return this.getAbbonamenti().pipe(
@@ -57,5 +60,30 @@ export class BigliettiService {
         abbonamenti.filter((a) => a.tessera.id === tessera.id)
       )
     );
+  }
+
+  public deleteBiglietto(id: number) {
+    return this.http.delete(`${this.bigliettiUrl}/${id}`);
+  }
+
+  public creaGiornalierio(rivenditoreId: number, trattaId: number) {
+    return this.http.post(`${this.bigliettiUrl}`, {
+      rivenditoreId: rivenditoreId,
+      trattaId: trattaId,
+      tipo: 'Giornaliero',
+    });
+  }
+
+  public creaAbbonamento(
+    rivenditoreId: number,
+    tesseraId: number,
+    periodicy: string
+  ) {
+    return this.http.post(`${this.bigliettiUrl}`, {
+      rivenditoreId: rivenditoreId,
+      tipo: 'Abbonamento',
+      periodicy: periodicy,
+      tesseraId: tesseraId,
+    });
   }
 }
