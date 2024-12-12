@@ -33,7 +33,7 @@ export class MezziService {
   //   });
   // }
 
-  // nuove
+  // crud nuove
   public getMezzi(): Observable<iMezzo[]> {
     return this.http.get<iMezzo[]>(this.mezziUrl);
   }
