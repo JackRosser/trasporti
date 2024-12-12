@@ -1,0 +1,71 @@
+<h3 class="text-center pt-32 pb-5 text-3xl">Inserisci la nuova tratta</h3>
+<section class="bg-slate-300 w-full flex justify-center items-center">
+  <form
+    #routeForm="ngForm"
+    (ngSubmit)="onSubmit(routeForm.value)"
+    class="p-4 flex flex-col text-center border justify-center items-center shadow-md mt-[12rem] lg:mt-0 md:mt-[7rem]"
+  >
+    <!-- Partenza -->
+    <div class="mb-4">
+      <label
+        for="departure"
+        class="block text-sm font-medium mb-3 text-[1.5rem]"
+      >
+        Partenza
+      </label>
+      <input
+        type="text"
+        id="departure"
+        name="departure"
+        [(ngModel)]="formData.departure"
+        required
+        class="border rounded px-2 py-1 w-full outline-none"
+      />
+    </div>
+
+    <!-- Capolinea -->
+    <div class="mb-4">
+      <label
+        for="destination"
+        class="block text-sm font-medium mb-3 text-[1.5rem]"
+      >
+        Capolinea
+      </label>
+      <input
+        type="text"
+        id="destination"
+        name="destination"
+        [(ngModel)]="formData.destination"
+        required
+        class="border rounded px-2 py-1 w-full outline-none"
+      />
+    </div>
+
+    <!-- Durata -->
+    <div class="mb-4">
+      <label
+        for="duration"
+        class="block text-sm font-medium mb-3 text-[1.5rem]"
+      >
+        Durata (in minuti)
+      </label>
+      <input
+        type="number"
+        id="duration"
+        name="duration"
+        [(ngModel)]="formData.duration"
+        required
+        class="border rounded px-2 py-1 w-full outline-none"
+      />
+    </div>
+
+    <!-- Submit -->
+    <button
+      type="submit"
+      [disabled]="!routeForm.valid"
+      class="bg-blue-500 text-white px-4 py-2 rounded cursor-pointer hover:scale-110 hover:text-blue-500 hover:bg-white transition-all duration-300 mt-5"
+    >
+      Procedi
+    </button>
+  </form>
+</section>

@@ -44,6 +44,8 @@ const routes: Routes = [
       import('./pages/user/user.module').then((m) => m.UserModule),
   },
   { path: 'test', component: TestComponent },
+  { path: 'inserimentoMezzi', loadChildren: () => import('./pages/inserimento-mezzi/inserimento-mezzi.module').then(m => m.InserimentoMezziModule) },
+  { path: 'insert-tratta', loadChildren: () => import('./pages/insert-tratta/insert-tratta.module').then(m => m.InsertTrattaModule) },
 ];
 
 @NgModule({
