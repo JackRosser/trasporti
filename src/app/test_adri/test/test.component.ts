@@ -9,6 +9,7 @@ import { iRivenditore } from '../../interfaces/i-rivenditore';
 import { iMezzo } from '../../interfaces/i-mezzo';
 import { UtentiService } from '../../services/utenti.service';
 import { iUtente } from '../../interfaces/i-utente';
+import { TessereService } from '../../services/tessere.service';
 
 @Component({
   selector: 'app-test',
@@ -20,7 +21,8 @@ export class TestComponent {
     private tratteSvc: TratteService,
     private rivenditoriSvc: RivenditoriService,
     private mezziSvc: MezziService,
-    private utentiSvc: UtentiService
+    private utentiSvc: UtentiService,
+    private tessereSvc: TessereService
   ) {}
 
   tratte!: iTratta[];
@@ -80,7 +82,7 @@ export class TestComponent {
     });
 
     // rivenditore fisico
-    this.rivenditoriSvc.getRivenditoreById(13).subscribe((res) => {
+    this.rivenditoriSvc.getRivenditoreById(164).subscribe((res) => {
       if (res) this.rivenditoreById = res;
       console.log(this.rivenditoreById);
     });
@@ -110,10 +112,21 @@ export class TestComponent {
     this.utentiSvc.getUtenti().subscribe((res) => console.log(res));
 
     // test getUtenteById
-    this.utentiSvc.getUtenteById(74).subscribe((res) => {
+    this.utentiSvc.getUtenteById(52).subscribe((res) => {
       if (res) this.utenteById1 = res;
       console.log(this.utenteById1);
+
+      // getTesseraByUtente
+      this.tessereSvc
+        .getTesseraByUtente(this.utenteById1)
+        .subscribe((res) => console.log('tessera utente', res));
     });
+
+    this.tessereSvc.getTessere().subscribe((res) => console.log(res));
+
+    this.tessereSvc
+      .getTesseraByCodice('T-HSOJVAVDQY')
+      .subscribe((res) => console.log('tessera per codice', res));
   }
 
   inserisciTratta() {
@@ -184,5 +197,12 @@ export class TestComponent {
   // test cancella utente
   cancellaUtente() {
     this.utentiSvc.deleteUtente(70).subscribe();
+  }
+
+  // test createssera
+  createssera() {
+    this.tessereSvc
+      .createTessera(this.rivenditoreById.id, this.utenteById1.id)
+      .subscribe();
   }
 }
