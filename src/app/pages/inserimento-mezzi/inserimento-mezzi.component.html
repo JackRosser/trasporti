@@ -5,13 +5,31 @@
     (ngSubmit)="onSubmit(seatForm.value)"
     class="p-4 flex flex-col text-center border justify-center items-center shadow-md mt-[12rem] lg:mt-0 md:mt-[7rem]"
   >
-    <!-- Quantità di posti a sedere -->
+    <!-- Tipologia del mezzo -->
+    <div class="mb-4">
+      <label for="tipo" class="block text-sm font-medium mb-3 text-[1.5rem]">
+        Tipologia del mezzo
+      </label>
+      <select
+        id="tipo"
+        name="tipo"
+        [(ngModel)]="formData.tipo"
+        required
+        class="border rounded px-2 py-1 w-full outline-none"
+      >
+        <option value="">Seleziona</option>
+        <option value="Autobus">Autobus</option>
+        <option value="Tram">Tram</option>
+      </select>
+    </div>
+
+    <!-- Capienza -->
     <div class="mb-4">
       <label
         for="seatQuantity"
         class="block text-sm font-medium mb-3 text-[1.5rem]"
       >
-        Quantità di posti a sedere
+        Capienza
       </label>
       <input
         type="number"
@@ -39,8 +57,8 @@
         class="border rounded px-2 py-1 w-full outline-none"
       >
         <option value="">Seleziona</option>
-        <option value="yes">Sì</option>
-        <option value="no">No</option>
+        <option [value]="'true'">In Servizio</option>
+        <option [value]="'false'">Deposito</option>
       </select>
     </div>
 
