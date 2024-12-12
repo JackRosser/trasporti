@@ -9,6 +9,9 @@ import { iRivenditore } from '../../interfaces/i-rivenditore';
 import { iMezzo } from '../../interfaces/i-mezzo';
 import { UtentiService } from '../../services/utenti.service';
 import { iUtente } from '../../interfaces/i-utente';
+import { TessereService } from '../../services/tessere.service';
+import { iTessera } from '../../interfaces/i-tessera';
+import { BigliettiService } from '../../services/biglietti.service';
 
 @Component({
   selector: 'app-test',
@@ -20,7 +23,9 @@ export class TestComponent {
     private tratteSvc: TratteService,
     private rivenditoriSvc: RivenditoriService,
     private mezziSvc: MezziService,
-    private utentiSvc: UtentiService
+    private utentiSvc: UtentiService,
+    private tessereSvc: TessereService,
+    private bigliettiSvc: BigliettiService
   ) {}
 
   tratte!: iTratta[];
@@ -58,6 +63,8 @@ export class TestComponent {
     ruolo: 'utente',
   };
 
+  tesseraRinnovo!: iTessera;
+
   ngOnInit() {
     // test getTratte
     this.tratteSvc.getTratte().subscribe((res) => {
@@ -80,13 +87,13 @@ export class TestComponent {
     });
 
     // rivenditore fisico
-    this.rivenditoriSvc.getRivenditoreById(13).subscribe((res) => {
+    this.rivenditoriSvc.getRivenditoreById(164).subscribe((res) => {
       if (res) this.rivenditoreById = res;
       console.log(this.rivenditoreById);
     });
 
     // rivenditore automatico
-    this.rivenditoriSvc.getRivenditoreById(8).subscribe((res) => {
+    this.rivenditoriSvc.getRivenditoreById(155).subscribe((res) => {
       if (res) this.rivenditoreById2 = res;
       console.log(this.rivenditoreById2);
     });
@@ -110,10 +117,49 @@ export class TestComponent {
     this.utentiSvc.getUtenti().subscribe((res) => console.log(res));
 
     // test getUtenteById
-    this.utentiSvc.getUtenteById(74).subscribe((res) => {
+    this.utentiSvc.getUtenteById(57).subscribe((res) => {
       if (res) this.utenteById1 = res;
       console.log(this.utenteById1);
+
+      // getTesseraByUtente
+      this.tessereSvc
+        .getTesseraByUtente(this.utenteById1)
+        .subscribe((res) => console.log('tessera utente', res));
     });
+
+    // test geet tessere
+    this.tessereSvc.getTessere().subscribe((res) => console.log(res));
+
+    // test tessera per codice
+    this.tessereSvc.getTesseraByCodice('T-HSOJVAVDQY').subscribe((res) => {
+      if (res) {
+        this.tesseraRinnovo = res;
+        console.log('tessera per codice', res);
+        // test abbonamenti per tessera
+        // this.bigliettiSvc
+        //   .getAbbonamentiByTessera(this.tesseraRinnovo)
+        //   .subscribe((res) => console.log('abbonamenti per tessera:', res));
+      }
+    });
+
+    // test get biglietti
+    this.bigliettiSvc.getBiglietti().subscribe((res) => console.log(res));
+
+    // get biglietti giornalieri
+    this.bigliettiSvc.getGiornalieri().subscribe((res) => console.log(res));
+
+    // get biglietti abbonamenti
+    this.bigliettiSvc.getAbbonamenti().subscribe((res) => console.log(res));
+
+    // get biglietto byId
+    this.bigliettiSvc
+      .getGiornalieroById(102)
+      .subscribe((res) => console.log('Giornaliero per id', res));
+
+    // get abbonamento byId
+    this.bigliettiSvc
+      .getAbbonamentoById(205)
+      .subscribe((res) => console.log('Abbonamento per id', res));
   }
 
   inserisciTratta() {
@@ -184,5 +230,22 @@ export class TestComponent {
   // test cancella utente
   cancellaUtente() {
     this.utentiSvc.deleteUtente(70).subscribe();
+  }
+
+  // test createssera
+  createssera() {
+    this.tessereSvc
+      .createTessera(this.rivenditoreById.id, this.utenteById1.id)
+      .subscribe();
+  }
+
+  // test rinnovatessera
+  rinnovatessera() {
+    this.tessereSvc.rinnovaTessera(this.tesseraRinnovo).subscribe();
+  }
+
+  // test deletetessera
+  cancellatessera() {
+    this.tessereSvc.deleteTessera(this.tesseraRinnovo.id).subscribe();
   }
 }
