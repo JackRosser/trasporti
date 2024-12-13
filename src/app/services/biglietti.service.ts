@@ -25,7 +25,9 @@ export class BigliettiService {
     return this.getBiglietti().pipe(
       map(
         (biglietti: iBiglietto[]) =>
-          biglietti.filter((b) => b.tipo === 'Giornaliero') as iGiornaliero[]
+          biglietti.filter(
+            (b) => b.tipo.toLowerCase() === 'giornaliero'
+          ) as iGiornaliero[]
       )
     );
   }
@@ -34,7 +36,9 @@ export class BigliettiService {
     return this.getBiglietti().pipe(
       map(
         (biglietti: iBiglietto[]) =>
-          biglietti.filter((b) => b.tipo === 'Abbonamento') as iAbbonamento[]
+          biglietti.filter(
+            (b) => b.tipo.toLowerCase() === 'abbonamento'
+          ) as iAbbonamento[]
       )
     );
   }
@@ -77,6 +81,7 @@ export class BigliettiService {
   public creaAbbonamento(
     rivenditoreId: number,
     tesseraId: number,
+    utenteId: number,
     periodicy: string
   ) {
     return this.http.post(`${this.bigliettiUrl}`, {
@@ -84,6 +89,7 @@ export class BigliettiService {
       tipo: 'Abbonamento',
       periodicy: periodicy,
       tesseraId: tesseraId,
+      utenteId: utenteId,
     });
   }
 }

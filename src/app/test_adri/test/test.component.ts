@@ -28,13 +28,15 @@ export class TestComponent {
     private bigliettiSvc: BigliettiService
   ) {}
 
+  tratta!: iTratta;
+  rivenditore!: iRivenditore;
+
   ngOnInit() {
     // get tutte le tratte
     // this.tratteSvc.getTratte().subscribe((res) => console.log('Tratte', res));
 
     // get tratta per id
-    this.tratteSvc.getTrattaById(2);
-    // .subscribe((res) => console.log('tratta per id', res));
+    this.tratteSvc.getTrattaById(2).subscribe((res) => (this.tratta = res));
 
     // inserimento nuova tratta
     // let nuovaTratta: Partial<iTratta> = {
@@ -68,9 +70,9 @@ export class TestComponent {
     // this.rivenditoriSvc
     //   .getRivenditoreById(154)
     //   .subscribe((res) => console.log('rivenditore per id', res));
-    // this.rivenditoriSvc
-    //   .getRivenditoreById(155)
-    //   .subscribe((res) => console.log('rivenditore per id', res));
+    this.rivenditoriSvc
+      .getRivenditoreById(155)
+      .subscribe((res) => (this.rivenditore = res));
 
     // crea rivenditore fisico
     // let rivFisico: Partial<iRivFisico> = {
@@ -88,14 +90,32 @@ export class TestComponent {
     //   .subscribe((res) => console.log('riv automatico creato ', res));
 
     // get tutti biglietti
-    this.bigliettiSvc
-      .getBiglietti()
-      .subscribe((res) => console.log('tutti biglietti/abbonamenti ', res));
+    // this.bigliettiSvc
+    //   .getBiglietti()
+    //   .subscribe((res) => console.log('tutti biglietti/abbonamenti ', res));
     // this.bigliettiSvc
     //   .getAbbonamenti()
     //   .subscribe((res) => console.log('tutti abbonamenti', res));
     // this.bigliettiSvc
     //   .getGiornalieri()
     //   .subscribe((res) => console.log('tutti giornalieri ', res));
+    // insert giornaliero
   }
+
+  // creaGiornaliero() {
+  //   if (this.tratta && this.rivenditore) {
+  //     this.bigliettiSvc
+  //       .creaGiornalierio(this.rivenditore.id, this.tratta.id)
+  //       .subscribe((res) => console.log('giornaliero creato', res));
+  //   }
+  // }
+
+  // creaAbbonamento() {
+  //   if (this.tratta && this.rivenditore) {
+  //     let periodicy = 'mensile';
+  //     this.bigliettiSvc
+  //       .creaAbbonamento(this.rivenditore.id, 2, 57, periodicy)
+  //       .subscribe((res) => console.log('abbonamento creato ', res));
+  //   }
+  // }
 }
