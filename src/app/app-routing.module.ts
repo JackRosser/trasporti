@@ -9,6 +9,7 @@ import { TestComponent } from './test_adri/test/test.component';
 import { LoginGuard } from './guards/login.guard';
 import { AdminGuard } from './guards/admin.guard';
 import { UtenteGuard } from './guards/utente.guard';
+import { TestCipoComponent } from './test-cipo/test-cipo.component';
 
 const routes: Routes = [
   {
@@ -48,6 +49,7 @@ const routes: Routes = [
     canActivate: [LoginGuard, UtenteGuard],
   },
   { path: 'test', component: TestComponent },
+  { path: 'testcipo', component: TestCipoComponent },
   {
     path: 'backoffice',
     loadChildren: () =>
