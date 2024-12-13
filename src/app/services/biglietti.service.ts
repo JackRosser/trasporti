@@ -78,8 +78,9 @@ export class BigliettiService {
     rivenditoreId: number,
     tesseraId: number,
     periodicy: string
-  ) {
-    return this.http.post(`${this.bigliettiUrl}`, {
+  ): Observable<iAbbonamento> {
+    // Specifica il tipo di ritorno
+    return this.http.post<iAbbonamento>(`${this.bigliettiUrl}`, {
       rivenditoreId: rivenditoreId,
       tipo: 'Abbonamento',
       periodicy: periodicy,

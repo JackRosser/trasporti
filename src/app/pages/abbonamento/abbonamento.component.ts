@@ -3,6 +3,7 @@ import { iUtente } from '../../interfaces/i-utente';
 import { BigliettiService } from '../../services/biglietti.service';
 import { UtentiService } from '../../services/utenti.service';
 import { ePeriodicy } from '../../interfaces/e-periodicy';
+import { iAbbonamento } from '../../interfaces/i-abbonamento';
 
 @Component({
   selector: 'app-abbonamento',
@@ -18,6 +19,7 @@ export class AbbonamentoComponent {
   };
 
   utente!: iUtente;
+  showSubscriptionOptions = false;
 
   constructor(
     private bigliettiService: BigliettiService,
@@ -36,17 +38,32 @@ export class AbbonamentoComponent {
       return;
     }
 
+    this.showSubscriptionOptions = true;
+  }
+
+  purchaseSubscription(subscriptionType: string) {
+    if (!this.utente || !this.utente.tessera) {
+      alert('Devi avere una tessera valida per acquistare un abbonamento.');
+      return;
+    }
+
     const rivenditoreId = 159;
     const tesseraId = this.utente.tessera.id;
-    const periodicy = this.formData.subscriptionType;
+    const periodicy = this.getPeriodicy(subscriptionType);
 
     this.bigliettiService
       .creaAbbonamento(rivenditoreId, tesseraId, periodicy)
       .subscribe({
-        next: (res) => {
+        next: (res: iAbbonamento) => {
+          // Tipo esplicito per `res`
           alert('Abbonamento acquistato con successo!');
+          if (this.utente.tessera) {
+            this.utente.tessera.abbonamento.push(res); // Ora `res` è di tipo `iAbbonamento`
+          }
+          this.showSubscriptionOptions = false;
         },
         error: (err) => {
+          console.error("Errore durante l'acquisto dell'abbonamento:", err);
           alert("Errore durante l'acquisto dell'abbonamento.");
         },
       });
