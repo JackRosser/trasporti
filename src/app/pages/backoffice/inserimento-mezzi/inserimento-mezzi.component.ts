@@ -41,8 +41,13 @@ export class InserimentoMezziComponent implements OnInit {
     this.mezziService
       .createMezzo(this.formData.tipo, this.formData.codice)
       .subscribe(
-        (response) => {
-          alert('Mezzo aggiunto con successo!');
+        (res) => {
+          alert(
+            `Mezzo aggiunto con successo! Mezzo: ${res.tipo} - Codice: ${res.codice} - Stato: ${res.stato} - Capienza: ${res.capienza}`
+          );
+          setTimeout(() => {
+            this.router.navigate(['/parco-mezzi']);
+          }, 1500);
           this.getMezzi(); // Aggiorna la lista dei mezzi
         },
         (error) => {
