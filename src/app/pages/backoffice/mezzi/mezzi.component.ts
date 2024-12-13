@@ -25,8 +25,11 @@ export class MezziComponent implements OnInit {
   constructor(
     private tratteSvc: TratteService,
     private mezziSvc: MezziService,
-    private statoMezziSvc: StatomezzoService
+    private statoMezziSvc: StatomezzoService,
+    private tratteService: TratteService
   ) {}
+
+  tratte!: iTratta[];
 
   changeInActiveTram(): void {
     this.buttonClassBus =
@@ -66,13 +69,12 @@ export class MezziComponent implements OnInit {
     });
   }
 
-  public mettiInServizio(mezzo: iMezzo, tratta: iTratta) {
+  public mettiInServizio(mezzo: iMezzo) {
+    let random = Math.floor(Math.random() * 30) + 1;
     this.statoMezziSvc
-      .createServizio(mezzo.id, tratta.id)
+      .createServizio(mezzo.id, random)
       .pipe((res) => {
-        console.log('siamo qua');
-        console.log(res);
-
+        alert('Mezzo messo in servizio!');
         return res;
       })
       .subscribe((res) => {
@@ -83,8 +85,7 @@ export class MezziComponent implements OnInit {
     this.statoMezziSvc
       .createManutenzione(mezzo.id, 'Cambio gomme')
       .pipe((res) => {
-        console.log('siamo qua');
-        console.log(res);
+        alert('Mezzo in manutenzione!');
 
         return res;
       })
