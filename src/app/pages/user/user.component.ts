@@ -23,13 +23,15 @@ export class UserComponent implements OnInit {
     private tessereSvc: TessereService
   ) {}
 
+  showTessera: boolean = false;
+
   ngOnInit(): void {
     this.utentiService.loggedUser$.subscribe((loggedUser) => {
       if (loggedUser) {
         this.utente = loggedUser;
-        this.tessereSvc.getTesseraByUtente(this.utente).subscribe((res) => {
-          if (res) this.tessera = res;
-        });
+        if (this.utente.tessera) {
+          this.showTessera = true;
+        }
       }
     });
 
@@ -68,6 +70,7 @@ export class UserComponent implements OnInit {
           next: (res) => {
             alert('Tessera generata con successo!');
             this.utente.tessera = res;
+            this.showTessera = true;
             this.utentiService.loggedUser$.next(this.utente);
           },
           error: (err) => alert('Errore nella richiesta!'),
