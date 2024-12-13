@@ -36,53 +36,85 @@
       </div>
     </div>
 
-    <!-- Campi aggiuntivi per Fisico -->
-    <div
-      *ngIf="formData.serviceType === 'fisico'"
-      class="grid grid-cols-1 md:grid-cols-2 gap-2 mb-4"
-    >
-      <!-- Nome -->
+    <!-- Campi per Rivenditore Fisico -->
+    <div *ngIf="formData.serviceType === 'fisico'">
+      <!-- Giorno di Chiusura -->
       <div class="mb-4">
         <label
-          for="physicalName"
+          for="giornoChiusura"
           class="block text-sm font-medium mb-3 text-[1.5rem]"
+          >Giorno di Chiusura</label
         >
-          Nome
-        </label>
         <input
-          type="text"
-          id="physicalName"
-          name="physicalName"
-          [(ngModel)]="formData.physicalName"
+          type="number"
+          id="giornoChiusura"
+          name="giornoChiusura"
+          [(ngModel)]="formData.giornoChiusura"
+          min="1"
+          max="7"
           required
           class="border rounded px-2 py-1 w-full outline-none"
         />
       </div>
 
-      <!-- Orari -->
+      <!-- Orario di Apertura -->
       <div class="mb-4">
         <label
-          for="timeSlot"
+          for="oraApertura"
           class="block text-sm font-medium mb-3 text-[1.5rem]"
+          >Orario di Apertura</label
         >
-          Orari
-        </label>
         <input
-          type="text"
-          id="timeSlot"
-          name="timeSlot"
-          [(ngModel)]="formData.timeSlot"
+          type="time"
+          id="oraApertura"
+          name="oraApertura"
+          [(ngModel)]="formData.oraApertura"
+          required
+          class="border rounded px-2 py-1 w-full outline-none"
+        />
+      </div>
+
+      <!-- Orario di Chiusura -->
+      <div class="mb-4">
+        <label
+          for="oraChiusura"
+          class="block text-sm font-medium mb-3 text-[1.5rem]"
+          >Orario di Chiusura</label
+        >
+        <input
+          type="time"
+          id="oraChiusura"
+          name="oraChiusura"
+          [(ngModel)]="formData.oraChiusura"
           required
           class="border rounded px-2 py-1 w-full outline-none"
         />
       </div>
     </div>
 
+    <!-- Campi per Rivenditore Automatico -->
+    <div *ngIf="formData.serviceType === 'automatico'" class="mb-4">
+      <label for="attivo" class="block text-sm font-medium mb-3 text-[1.5rem]"
+        >Attivo</label
+      >
+      <select
+        id="attivo"
+        name="attivo"
+        [(ngModel)]="formData.attivo"
+        required
+        class="border rounded px-2 py-1 w-full outline-none"
+      >
+        <option value="">Seleziona</option>
+        <option value="true">Sì</option>
+        <option value="false">No</option>
+      </select>
+    </div>
+
     <!-- Zona -->
     <div class="mb-4">
-      <label for="zone" class="block text-sm font-medium mb-3 text-[1.5rem]">
-        Zona
-      </label>
+      <label for="zone" class="block text-sm font-medium mb-3 text-[1.5rem]"
+        >Zona</label
+      >
       <input
         type="text"
         id="zone"

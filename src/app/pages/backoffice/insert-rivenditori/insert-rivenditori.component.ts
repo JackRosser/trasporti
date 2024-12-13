@@ -1,4 +1,7 @@
 import { Component } from '@angular/core';
+import { RivenditoriService } from '../../../services/rivenditori.service';
+import { iRivFisico } from '../../../interfaces/i-riv-fisico';
+import { iRivAutomatico } from '../../../interfaces/i-riv-automatico';
 
 @Component({
   selector: 'app-insert-rivenditori',
@@ -9,29 +12,56 @@ export class InsertRivenditoriComponent {
   formData: {
     serviceType: string;
     physicalName?: string;
-    timeSlot?: string;
+    giornoChiusura?: number;
+    oraApertura?: string;
+    oraChiusura?: string;
+    attivo?: boolean;
     zone: string;
   } = {
     serviceType: '',
     zone: '',
   };
 
+  constructor(private rivenditoriService: RivenditoriService) {}
+
   onSubmit(formValue: any): void {
-    if (
-      this.formData.serviceType === 'fisico' &&
-      (!formValue.physicalName || !formValue.timeSlot)
-    ) {
-      alert('Per il servizio fisico, i campi Nome e Orari sono obbligatori.');
-      return;
-    }
+    console.log('Form submit chiamato con i valori:', formValue);
+    if (formValue.serviceType === 'fisico') {
+      const rivFisico: Partial<iRivFisico> = {
+        tipo: 'RivFisico',
+        giornoChiusura: formValue.giornoChiusura,
+        oraApertura: formValue.oraApertura,
+        oraChiusura: formValue.oraChiusura,
+      };
 
-    if (!formValue.zone) {
-      alert('Il campo Zona è obbligatorio.');
-      return;
-    }
+      this.rivenditoriService.createRivenditoreFisico(rivFisico).subscribe(
+        (response) => {
+          console.log('Rivenditore fisico aggiunto:', response);
+        },
+        (error) => {
+          console.error(
+            "Errore durante l'aggiunta del rivenditore fisico:",
+            error
+          );
+        }
+      );
+    } else if (formValue.serviceType === 'automatico') {
+      const rivAutomatico: Partial<iRivAutomatico> = {
+        tipo: 'RivAutomatico',
+        attivo: formValue.attivo,
+      };
 
-    // Qui puoi gestire il submit dei dati, ad esempio inviarli a un server
-    console.log('Form inviato con successo:', formValue);
-    alert('Form inviato con successo!');
+      this.rivenditoriService.createRivenditoreAutomatico().subscribe(
+        (response) => {
+          console.log('Rivenditore automatico aggiunto:', response);
+        },
+        (error) => {
+          console.error(
+            "Errore durante l'aggiunta del rivenditore automatico:",
+            error
+          );
+        }
+      );
+    }
   }
 }
