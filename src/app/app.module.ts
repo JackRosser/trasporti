@@ -6,11 +6,13 @@ import { AppComponent } from './app.component';
 import { SharedModule } from './shared/shared.module';
 import { HttpClient, provideHttpClient } from '@angular/common/http';
 import { TestComponent } from './test_adri/test/test.component';
+import { TestCipoComponent } from './test-cipo/test-cipo.component';
 
 @NgModule({
   declarations: [
     AppComponent,
-    TestComponent
+    TestComponent,
+    TestCipoComponent
   ],
   imports: [
     BrowserModule,
