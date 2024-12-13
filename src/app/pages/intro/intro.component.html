@@ -1,27 +1,56 @@
-<div class="w-full h-full flex flex-col lg:flex-row gap-2">
-  <section
-    class="w-full h-1/2 lg:w-1/2 lg:h-full cursor-pointer lg:opacity-80 lg:hover:opacity-100 flex justify-center items-center"
+<!-- Carosello -->
+<div class="relative w-full overflow-hidden h-80">
+  <div
+    class="absolute inset-0 flex transition-transform duration-1000 ease-in-out"
+    [style.transform]="'translateX(-' + carouselIndex * 100 + '%)'"
   >
+    <img
+      *ngFor="let image of carouselImages"
+      [src]="image"
+      alt="Carousel image"
+      class="w-full h-full object-cover flex-shrink-0"
+    />
+  </div>
+</div>
+
+<!-- Titolo e Descrizione -->
+<div class="bg-gray-50 py-8">
+  <h1 class="text-5xl text-center font-bold text-blue-800 mb-6">
+    Public Bus Enterprise
+  </h1>
+  <p class="text-lg text-center max-w-4xl mx-auto text-gray-700">
+    Benvenuti nel nostro sito dedicato ai mezzi di trasporto pubblici. Qui
+    troverete informazioni utili sia per i cittadini che per i gestori del
+    servizio. Navigate tra le sezioni per scoprire di più. La nostra piattaforma
+    offre servizi per rendere il trasporto pubblico più efficiente, accessibile
+    e conveniente per tutti.
+  </p>
+</div>
+
+<!-- Pulsanti di Navigazione -->
+<div
+  class="flex flex-col lg:flex-row gap-4 mt-8 justify-center items-center px-4"
+>
+  <!-- Utente -->
+  <section class="cursor-pointer transition-all hover:scale-105 transform">
     <button
-      class="bg-[#F10120] py-3 px-5 rounded-md text-white shadow-md hover:scale-110 hover:px-10 hover:py-8 transition-all duration-300 active:bg-white active:text-[#F10120]"
+      class="bg-gradient-to-r from-red-400 via-red-500 to-red-600 text-white py-4 px-8 rounded-lg shadow-lg text-xl font-semibold hover:shadow-2xl hover:from-red-500 hover:to-red-700 transition-all duration-300 active:bg-red-800"
     >
       <a [routerLink]="'/utente'" class="cursor-pointer">Utente</a>
     </button>
   </section>
-  <section
-    class="w-full h-1/2 lg:w-1/2 lg:h-full cursor-pointer lg:opacity-80 lg:hover:opacity-100 flex justify-center items-center"
-  >
+  <!-- Admin -->
+  <section class="cursor-pointer transition-all hover:scale-105 transform">
     <button
-      class="bg-[#F10120] py-3 px-5 rounded-md text-white shadow-md hover:scale-110 hover:px-10 hover:py-8 transition-all duration-300 active:bg-white active:text-[#F10120]"
+      class="bg-gradient-to-r from-red-400 via-red-500 to-red-600 text-white py-4 px-8 rounded-lg shadow-lg text-xl font-semibold hover:shadow-2xl hover:from-red-500 hover:to-red-700 transition-all duration-300 active:bg-red-800"
     >
       <a [routerLink]="'/admin'" class="cursor-pointer">Admin</a>
     </button>
   </section>
-  <section
-    class="w-full h-1/2 lg:w-1/2 lg:h-full cursor-pointer lg:opacity-80 lg:hover:opacity-100 flex justify-center items-center"
-  >
+  <!-- Rivenditore -->
+  <section class="cursor-pointer transition-all hover:scale-105 transform">
     <button
-      class="bg-[#F10120] py-3 px-5 rounded-md text-white shadow-md hover:scale-110 hover:px-10 hover:py-8 transition-all duration-300 active:bg-white active:text-[#F10120]"
+      class="bg-gradient-to-r from-red-400 via-red-500 to-red-600 text-white py-4 px-8 rounded-lg shadow-lg text-xl font-semibold hover:shadow-2xl hover:from-red-500 hover:to-red-700 transition-all duration-300 active:bg-red-800"
     >
       <a [routerLink]="'/rivenditore'" class="cursor-pointer">Rivenditore</a>
     </button>

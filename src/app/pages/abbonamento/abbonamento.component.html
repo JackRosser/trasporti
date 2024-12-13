@@ -1,101 +1,134 @@
-<div class="text-center p-24 text-3xl">
-  <h2>Acquista il tuo abbonamento</h2>
-</div>
-<section class="bg-slate-300 w-full flex justify-center items-center">
-  <form
-    #subscriptionForm="ngForm"
-    (ngSubmit)="onSubmit()"
-    class="p-4 flex flex-col text-center border justify-center items-center shadow-md mt-[12rem] lg:mt-0 md:mt-[7rem]"
+<div class="bg-gray-50 min-h-screen">
+  <!-- Header -->
+  <div
+    class="text-center py-16 bg-gradient-to-r from-blue-400 to-blue-600 text-white"
   >
-    <!-- Submit -->
-    <button
-      type="button"
-      class="px-4 py-2 rounded cursor-pointer hover:scale-105 transition-all duration-300 bg-blue-500 text-white"
-      (click)="onSubmit()"
-    >
-      Scopri i nostri abbonamenti
-    </button>
-  </form>
-</section>
-
-<section
-  *ngIf="showSubscriptionOptions"
-  class="bg-slate-300 w-full flex justify-center items-center"
->
-  <div class="grid grid-cols-2 lg:grid-cols-4 gap-2">
-    <!-- Mensile -->
-    <div class="flex flex-col bg-white p-2 gap-1">
-      <h2 class="text-[1.2rem] text-[#F10120]">Mensile</h2>
-      <p><s>Posti a sedere prenotati</s></p>
-      <p><s>Clemenza del controllore</s></p>
-      <p><s>Aria condizionata</s></p>
-      <p><s>Wifi</s></p>
-      <p class="text-red-500">
-        Obbligo di cessione del posto<br />ad abbonati superiori
-      </p>
-      <h3 class="text-[1.5rem]">50€</h3>
-      <button
-        type="button"
-        class="px-4 py-2 rounded cursor-pointer hover:scale-105 transition-all duration-300 bg-blue-500 text-white"
-        (click)="creaAbbonamento('mensile')"
-      >
-        Acquista
-      </button>
-    </div>
-    <!-- Bimestrale -->
-    <div class="flex flex-col bg-white p-2 gap-1">
-      <h2 class="text-[1.2rem] text-[#F10120]">Bimestrale</h2>
-      <p><s>Posti a sedere prenotati</s></p>
-      <p><s>Clemenza del controllore</s></p>
-      <p class="text-blue-500">Aria condizionata</p>
-      <p><s>Wifi</s></p>
-      <p class="text-red-500">
-        Obbligo di cessione del posto<br />ad abbonati superiori
-      </p>
-      <h3 class="text-[1.5rem]">99€</h3>
-      <button
-        type="button"
-        class="px-4 py-2 rounded cursor-pointer hover:scale-105 transition-all duration-300 bg-blue-500 text-white"
-        (click)="creaAbbonamento('bimestrale')"
-      >
-        Acquista
-      </button>
-    </div>
-    <!-- Trimestrale -->
-    <div class="flex flex-col bg-white p-2 gap-1">
-      <h2 class="text-[1.2rem] text-[#F10120]">Trimestrale</h2>
-      <p class="text-blue-500">Posti a sedere prenotati</p>
-      <p class="text-blue-500">Clemenza del controllore</p>
-      <p class="text-blue-500">Aria condizionata</p>
-      <p><s>Wifi</s></p>
-      <p class="text-red-500">
-        Obbligo di cessione del posto<br />ad abbonati superiori
-      </p>
-      <h3 class="text-[1.5rem]">170€</h3>
-      <button
-        type="button"
-        class="px-4 py-2 rounded cursor-pointer hover:scale-105 transition-all duration-300 bg-blue-500 text-white"
-        (click)="creaAbbonamento('trimestrale')"
-      >
-        Acquista
-      </button>
-    </div>
-    <!-- Annuale -->
-    <div class="flex flex-col bg-white p-2 gap-1">
-      <h2 class="text-[1.2rem] text-[#F10120]">Annuale</h2>
-      <p class="text-blue-500">Posti a sedere privilegiati</p>
-      <p class="text-blue-500">Caffè offerto dal controllore</p>
-      <p class="text-blue-500">Aria condizionata</p>
-      <p class="text-blue-500">Wifi</p>
-      <p class="text-green-600">Posto garantito<br />sempre e comunque</p>
-      <h3 class="text-[1.5rem]">610€</h3>
-      <button
-        type="button"
-        class="px-4 py-2 rounded cursor-pointer hover:scale-105 transition-all duration-300 bg-blue-500 text-white"
-        (click)="creaAbbonamento('annuale')"
-      >
-        Acquista
-      </button>
-    </div>
+    <h2 class="text-5xl font-bold mb-4">Acquista il tuo abbonamento</h2>
+    <p class="max-w-2xl mx-auto text-lg font-medium">
+      Acquistare un abbonamento per i mezzi pubblici offre numerosi vantaggi. È
+      economico, conveniente, ed ecologico, rendendo i tuoi viaggi quotidiani
+      più facili e senza stress.
+    </p>
   </div>
-</section>
+
+  <!-- Sezione Pulsante -->
+  <section class="flex justify-center items-center py-16 bg-blue-50">
+    <form
+      #subscriptionForm="ngForm"
+      (ngSubmit)="onSubmit()"
+      class="p-6 text-center shadow-lg rounded-lg bg-white border"
+    >
+      <button
+        type="button"
+        class="px-6 py-3 rounded-full bg-blue-500 text-white text-lg font-semibold hover:bg-blue-600 hover:scale-110 transition-transform duration-300 shadow-lg"
+        (click)="onSubmit()"
+      >
+        Scopri i nostri abbonamenti
+      </button>
+    </form>
+  </section>
+
+  <!-- Sezione Opzioni Abbonamento -->
+  <section
+    *ngIf="showSubscriptionOptions"
+    class="py-16 bg-gradient-to-r from-gray-200 via-gray-100 to-gray-200"
+  >
+    <div
+      class="max-w-6xl mx-auto grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-8 px-4"
+    >
+      <!-- Mensile -->
+      <div
+        class="flex flex-col bg-white rounded-lg shadow-md p-6 hover:shadow-xl transform hover:scale-105 transition-transform duration-300"
+      >
+        <h2 class="text-xl font-bold text-red-500 mb-2">Mensile</h2>
+        <ul class="text-gray-600 mb-4">
+          <li><s>Posti a sedere prenotati</s></li>
+          <li><s>Clemenza del controllore</s></li>
+          <li><s>Aria condizionata</s></li>
+          <li><s>Wifi</s></li>
+        </ul>
+        <p class="text-red-500 mb-4">
+          Obbligo di cessione del posto<br />ad abbonati superiori
+        </p>
+        <h3 class="text-2xl font-semibold text-gray-800 mb-4">50€</h3>
+        <button
+          type="button"
+          class="px-6 py-3 rounded-lg bg-blue-500 text-white font-bold hover:bg-blue-600 hover:scale-105 transition-transform duration-300 shadow-lg"
+          (click)="creaAbbonamento('mensile')"
+        >
+          Acquista
+        </button>
+      </div>
+
+      <!-- Bimestrale -->
+      <div
+        class="flex flex-col bg-white rounded-lg shadow-md p-6 hover:shadow-xl transform hover:scale-105 transition-transform duration-300"
+      >
+        <h2 class="text-xl font-bold text-red-500 mb-2">Bimestrale</h2>
+        <ul class="text-gray-600 mb-4">
+          <li><s>Posti a sedere prenotati</s></li>
+          <li><s>Clemenza del controllore</s></li>
+          <li class="text-blue-500">Aria condizionata</li>
+          <li><s>Wifi</s></li>
+        </ul>
+        <p class="text-red-500 mb-4">
+          Obbligo di cessione del posto<br />ad abbonati superiori
+        </p>
+        <h3 class="text-2xl font-semibold text-gray-800 mb-4">99€</h3>
+        <button
+          type="button"
+          class="px-6 py-3 rounded-lg bg-blue-500 text-white font-bold hover:bg-blue-600 hover:scale-105 transition-transform duration-300 shadow-lg"
+          (click)="creaAbbonamento('bimestrale')"
+        >
+          Acquista
+        </button>
+      </div>
+
+      <!-- Trimestrale -->
+      <div
+        class="flex flex-col bg-white rounded-lg shadow-md p-6 hover:shadow-xl transform hover:scale-105 transition-transform duration-300"
+      >
+        <h2 class="text-xl font-bold text-red-500 mb-2">Trimestrale</h2>
+        <ul class="text-gray-600 mb-4">
+          <li class="text-blue-500">Posti a sedere prenotati</li>
+          <li class="text-blue-500">Clemenza del controllore</li>
+          <li class="text-blue-500">Aria condizionata</li>
+          <li><s>Wifi</s></li>
+        </ul>
+        <p class="text-red-500 mb-4">
+          Obbligo di cessione del posto<br />ad abbonati superiori
+        </p>
+        <h3 class="text-2xl font-semibold text-gray-800 mb-4">170€</h3>
+        <button
+          type="button"
+          class="px-6 py-3 rounded-lg bg-blue-500 text-white font-bold hover:bg-blue-600 hover:scale-105 transition-transform duration-300 shadow-lg"
+          (click)="creaAbbonamento('trimestrale')"
+        >
+          Acquista
+        </button>
+      </div>
+
+      <!-- Annuale -->
+      <div
+        class="flex flex-col bg-white rounded-lg shadow-md p-6 hover:shadow-xl transform hover:scale-105 transition-transform duration-300"
+      >
+        <h2 class="text-xl font-bold text-red-500 mb-2">Annuale</h2>
+        <ul class="text-gray-600 mb-4">
+          <li class="text-blue-500">Posti a sedere privilegiati</li>
+          <li class="text-blue-500">Caffè offerto dal controllore</li>
+          <li class="text-blue-500">Aria condizionata</li>
+          <li class="text-blue-500">Wifi</li>
+        </ul>
+        <p class="text-green-600 mb-4">Posto garantito sempre e comunque</p>
+        <h3 class="text-2xl font-semibold text-gray-800 mb-4">610€</h3>
+        <button
+          type="button"
+          class="px-6 py-3 rounded-lg bg-blue-500 text-white font-bold hover:bg-blue-600 hover:scale-105 transition-transform duration-300 shadow-lg"
+          (click)="creaAbbonamento('annuale')"
+        >
+          Acquista
+        </button>
+      </div>
+    </div>
+  </section>
+</div>
