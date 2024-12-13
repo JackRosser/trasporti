@@ -16,6 +16,7 @@ export class UserComponent implements OnInit {
   utente!: iUtente; // Utente con ID 52
   tessera!: iTessera; // Tessera generata
   rivenditori!: iRivenditore[];
+  rivenditoreId: number = 0;
   constructor(
     private utentiService: UtentiService,
     private rivendoriSvc: RivenditoriService,
@@ -62,10 +63,11 @@ export class UserComponent implements OnInit {
     );
     if (this.utente) {
       this.tessereSvc
-        .createTessera(this.rivenditori[random].id, this.utente.id)
+        .createTessera(this.rivenditoreId, this.utente.id)
         .subscribe({
           next: (res) => {
             alert('Tessera generata con successo!');
+            this.utente.tessera = res;
             this.utentiService.loggedUser$.next(this.utente);
           },
           error: (err) => alert('Errore nella richiesta!'),

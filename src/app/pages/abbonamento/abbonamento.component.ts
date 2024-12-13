@@ -24,7 +24,9 @@ export class AbbonamentoComponent {
   constructor(
     private bigliettiService: BigliettiService,
     private utentiService: UtentiService
-  ) {
+  ) {}
+
+  ngOnInit() {
     this.utentiService.loggedUser$.subscribe((loggedUser) => {
       if (loggedUser) {
         this.utente = loggedUser;
@@ -33,7 +35,7 @@ export class AbbonamentoComponent {
   }
 
   onSubmit() {
-    if (!this.utente || !this.utente.tessera) {
+    if (!this.utente.tessera) {
       alert('Devi avere una tessera valida per acquistare un abbonamento.');
       return;
     }

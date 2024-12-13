@@ -24,19 +24,20 @@ export class InsertRivenditoriComponent {
 
   constructor(private rivenditoriService: RivenditoriService) {}
 
-  onSubmit(formValue: any): void {
-    console.log('Form submit chiamato con i valori:', formValue);
-    if (formValue.serviceType === 'fisico') {
+  onSubmit(): void {
+    if (this.formData.serviceType === 'fisico') {
       const rivFisico: Partial<iRivFisico> = {
         tipo: 'RivFisico',
-        giornoChiusura: formValue.giornoChiusura,
-        oraApertura: formValue.oraApertura,
-        oraChiusura: formValue.oraChiusura,
+        giornoChiusura: this.formData.giornoChiusura,
+        oraApertura: this.formData.oraApertura,
+        oraChiusura: this.formData.oraChiusura,
       };
 
       this.rivenditoriService.createRivenditoreFisico(rivFisico).subscribe(
-        (response) => {
-          console.log('Rivenditore fisico aggiunto:', response);
+        (res) => {
+          alert(
+            `Rivenditore fisico aggiunto: Giorno chiusura: ${res.giornoChiusura} - Orario apertura: ${res.oraApertura} - Orario chiusura: ${res.oraChiusura}`
+          );
         },
         (error) => {
           console.error(
@@ -45,15 +46,17 @@ export class InsertRivenditoriComponent {
           );
         }
       );
-    } else if (formValue.serviceType === 'automatico') {
+    } else if (this.formData.serviceType === 'automatico') {
       const rivAutomatico: Partial<iRivAutomatico> = {
         tipo: 'RivAutomatico',
-        attivo: formValue.attivo,
+        attivo: this.formData.attivo,
       };
 
       this.rivenditoriService.createRivenditoreAutomatico().subscribe(
-        (response) => {
-          console.log('Rivenditore automatico aggiunto:', response);
+        (res) => {
+          alert(
+            `Rivenditore automatico aggiunto: ${res.tipo} - attivo: ${res.attivo}`
+          );
         },
         (error) => {
           console.error(

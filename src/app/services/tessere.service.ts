@@ -32,8 +32,11 @@ export class TessereService {
     );
   }
 
-  public createTessera(rivenditoreId: number, utenteId: number) {
-    return this.http.post(this.tessereUrl, {
+  public createTessera(
+    rivenditoreId: number,
+    utenteId: number
+  ): Observable<iTessera> {
+    return this.http.post<iTessera>(this.tessereUrl, {
       rivenditoreId: rivenditoreId,
       utenteId: utenteId,
     });

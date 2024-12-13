@@ -46,12 +46,12 @@ export class RivenditoriService {
 
   public createRivenditoreFisico(
     rivFisico: Partial<iRivenditore>
-  ): Observable<iRivenditore> {
-    return this.http.post<iRivenditore>(this.rivenditoriUrl, rivFisico);
+  ): Observable<iRivFisico> {
+    return this.http.post<iRivFisico>(this.rivenditoriUrl, rivFisico);
   }
 
-  public createRivenditoreAutomatico(): Observable<string> {
-    return this.http.post<string>(this.rivenditoriUrl, {
+  public createRivenditoreAutomatico(): Observable<iRivAutomatico> {
+    return this.http.post<iRivAutomatico>(this.rivenditoriUrl, {
       tipo: 'RivAutomatico',
     });
   }

@@ -23,7 +23,16 @@
       src="https://hatchgreencoaches.co.uk/mobile/images/travel-card/bus-travel-card-taunton.jpg"
       alt="Tessera"
     />
-
+    <select name="rivenditore" id="rivenditore" [(ngModel)]="rivenditoreId">
+      <option value="">-- seleziona rivenditore --</option>
+      <option
+        value=""
+        *ngFor="let rivenditore of rivenditori"
+        [value]="rivenditore.id"
+      >
+        {{ rivenditore | json }}
+      </option>
+    </select>
     <button
       type="button"
       (click)="generaTessera()"
