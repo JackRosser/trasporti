@@ -46,41 +46,34 @@ export class AbbonamentoComponent {
       alert('Devi avere una tessera valida per acquistare un abbonamento.');
       return;
     }
-
-    const rivenditoreId = 159;
-    const tesseraId = this.utente.tessera.id;
-    const periodicy = this.getPeriodicy(subscriptionType);
-
-    this.bigliettiService
-      .creaAbbonamento(rivenditoreId, tesseraId, periodicy)
-      .subscribe({
-        next: (res: iAbbonamento) => {
-          // Tipo esplicito per `res`
-          alert('Abbonamento acquistato con successo!');
-          if (this.utente.tessera) {
-            this.utente.tessera.abbonamento.push(res); // Ora `res` è di tipo `iAbbonamento`
-          }
-          this.showSubscriptionOptions = false;
-        },
-        error: (err) => {
-          console.error("Errore durante l'acquisto dell'abbonamento:", err);
-          alert("Errore durante l'acquisto dell'abbonamento.");
-        },
-      });
   }
 
-  getPeriodicy(subscriptionType: string): ePeriodicy {
-    switch (subscriptionType) {
-      case 'mensile':
-        return ePeriodicy.MENSILE;
-      case 'bimestrale':
-        return ePeriodicy.BIMESTRALE;
-      case 'trimestrale':
-        return ePeriodicy.TRIMESTRALE;
-      case 'annuale':
-        return ePeriodicy.ANNUALE;
-      default:
-        throw new Error('Tipo di abbonamento non valido');
+  creaAbbonamento(periodicy: string) {
+    const rivenditoreId = 159;
+    if (this.utente && this.utente.tessera) {
+      this.bigliettiService
+        .creaAbbonamento(
+          rivenditoreId,
+          this.utente.tessera.id,
+          this.utente.id,
+          periodicy
+        )
+        .subscribe({
+          next: (res: iAbbonamento) => {
+            // Tipo esplicito per `res`
+            alert(
+              `Abbonamento acquistato con successo! Codice ${res.codice} + periodicita ${res.periodicy} + valido fino al ${res.scadenza}`
+            );
+
+            this.showSubscriptionOptions = false;
+          },
+          error: (err) => {
+            console.error("Errore durante l'acquisto dell'abbonamento:", err);
+            alert("Errore durante l'acquisto dell'abbonamento.");
+          },
+        });
+    } else {
+      alert("L'utente non ha una tessera valida");
     }
   }
 }
