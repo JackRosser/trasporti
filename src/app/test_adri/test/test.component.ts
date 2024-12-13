@@ -73,18 +73,29 @@ export class TestComponent {
     //   .subscribe((res) => console.log('rivenditore per id', res));
 
     // crea rivenditore fisico
-    let rivFisico: Partial<iRivFisico> = {
-      giornoChiusura: 2,
-      oraApertura: '10:00:00',
-      oraChiusura: '18:00:00',
-      tipo: 'RivFisico',
-    };
-    this.rivenditoriSvc
-      .createRivenditoreFisico(rivFisico)
-      .subscribe((res) => console.log('rivFisico creato', res));
+    // let rivFisico: Partial<iRivFisico> = {
+    //   giornoChiusura: 2,
+    //   oraApertura: '10:00:00',
+    //   oraChiusura: '18:00:00',
+    //   tipo: 'RivFisico',
+    // };
+    // this.rivenditoriSvc
+    //   .createRivenditoreFisico(rivFisico)
+    //   .subscribe((res) => console.log('rivFisico creato', res));
 
-    this.rivenditoriSvc
-      .createRivenditoreAutomatico()
-      .subscribe((res) => console.log('riv automatico creato ', res));
+    // this.rivenditoriSvc
+    //   .createRivenditoreAutomatico()
+    //   .subscribe((res) => console.log('riv automatico creato ', res));
+
+    // get tutti biglietti
+    this.bigliettiSvc
+      .getBiglietti()
+      .subscribe((res) => console.log('tutti biglietti/abbonamenti ', res));
+    // this.bigliettiSvc
+    //   .getAbbonamenti()
+    //   .subscribe((res) => console.log('tutti abbonamenti', res));
+    // this.bigliettiSvc
+    //   .getGiornalieri()
+    //   .subscribe((res) => console.log('tutti giornalieri ', res));
   }
 }
