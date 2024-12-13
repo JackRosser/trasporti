@@ -10,16 +10,18 @@
       <li><strong>Data di nascita:</strong> {{ utente.dataNascita | date }}</li>
       <li><strong>Email:</strong> {{ utente.email }}</li>
     </ul>
-    <h4 class="text-lg font-semibold text-gray-700 mt-4">Tipo di tessera</h4>
-    <p *ngIf="tessera" class="text-blue-600">
-      Tessera: {{ tessera.codice }} (Validità: {{ tessera.validita | date }})
+    <p *ngIf="showTessera && utente.tessera" class="text-blue-600">
+      Tessera: {{ utente.tessera.codice }}
     </p>
   </div>
 
   <!-- Sezione Tessera -->
-  <div class="flex flex-col items-center justify-center min-h-screen">
+  <div
+    class="flex flex-col items-center justify-center min-h-screen"
+    *ngIf="!showTessera"
+  >
     <div class="text-center">
-      <h5 class="text-3xl font-semibold text-gray-800 mb-4" *ngIf="!tessera">
+      <h5 class="text-3xl font-semibold text-gray-800 mb-4">
         Richiedi la tua tessera per acquistare fantastici abbonamenti!
       </h5>
       <img
