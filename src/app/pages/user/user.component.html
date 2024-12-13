@@ -8,13 +8,11 @@
     <li>Email: {{ utente.email }}</li>
   </ul>
 
-  <h4>Tipo di tessera</h4>
+  <ng-container *ngIf="showTessera && utente.tessera">
+    <p>Tessera: {{ utente.tessera.codice }}</p>
+  </ng-container>
 
-  <p *ngIf="tessera">
-    Tessera: {{ tessera.codice }} (Validità: {{ tessera.validita | date }})
-  </p>
-
-  <div class="text-center" *ngIf="!tessera">
+  <div class="text-center" *ngIf="!utente.tessera">
     <h5 class="text-3xl">
       Richiedi la tua tessera per acquistare fantastici abbonamenti!
     </h5>
