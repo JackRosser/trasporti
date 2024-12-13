@@ -1,73 +1,12 @@
-<section class="bg-slate-300 w-full h-full flex justify-center items-center">
+<div class="text-center p-24 text-3xl">
+  <h2>Acquista il tuo abbonamento</h2>
+</div>
+<section class="bg-slate-300 w-full flex justify-center items-center">
   <form
     #subscriptionForm="ngForm"
-    (ngSubmit)="onSubmit(subscriptionForm.value)"
+    (ngSubmit)="onSubmit()"
     class="p-4 flex flex-col text-center border justify-center items-center shadow-md mt-[12rem] lg:mt-0 md:mt-[7rem]"
   >
-    <!-- Tipo di Servizio -->
-    <div class="mb-4">
-      <div class="flex gap-4 justify-center">
-        <button
-          type="button"
-          [ngClass]="{
-            'bg-blue-500 text-white': formData.serviceType === 'tram',
-            'bg-gray-200 text-black': formData.serviceType !== 'tram'
-          }"
-          (click)="formData.serviceType = 'tram'"
-          class="px-4 py-2 rounded cursor-pointer hover:scale-105 transition-all duration-300"
-        >
-          Tram
-        </button>
-        <button
-          type="button"
-          [ngClass]="{
-            'bg-blue-500 text-white': formData.serviceType === 'autobus',
-            'bg-gray-200 text-black': formData.serviceType !== 'autobus'
-          }"
-          (click)="formData.serviceType = 'autobus'"
-          class="px-4 py-2 rounded cursor-pointer hover:scale-105 transition-all duration-300"
-        >
-          Autobus
-        </button>
-      </div>
-    </div>
-
-    <!-- Nome -->
-    <div class="grid grid-cols-1 md:grid-cols-2 gap-2">
-      <div class="mb-4">
-        <label
-          for="firstName"
-          class="block text-sm font-medium mb-3 text-[1.5rem]"
-          >Nome</label
-        >
-        <input
-          type="text"
-          id="firstName"
-          name="firstName"
-          [(ngModel)]="formData.firstName"
-          required
-          class="border rounded px-2 py-1 w-full outline-none"
-        />
-      </div>
-
-      <!-- Cognome -->
-      <div class="mb-4">
-        <label
-          for="lastName"
-          class="block text-sm font-medium mb-3 text-[1.5rem]"
-          >Cognome</label
-        >
-        <input
-          type="text"
-          id="lastName"
-          name="lastName"
-          [(ngModel)]="formData.lastName"
-          required
-          class="border rounded px-2 py-1 w-full outline-none"
-        />
-      </div>
-    </div>
-
     <!-- Tipo di abbonamento -->
     <div class="mb-4">
       <label class="block text-sm font-medium mb-3 text-[1.5rem]">
@@ -173,11 +112,15 @@
 
     <!-- Submit -->
     <button
-      type="submit"
-      [disabled]="!subscriptionForm.valid"
-      class="bg-blue-500 text-white px-4 py-2 rounded cursor-pointer hover:scale-110 hover:text-blue-500 hover:bg-white transition-all duration-300 mt-5"
+      type="button"
+      [ngClass]="{
+        'bg-blue-500 text-white': formData.subscriptionType === 'trimestrale',
+        'bg-gray-200 text-black': formData.subscriptionType !== 'trimestrale'
+      }"
+      (click)="formData.subscriptionType = 'trimestrale'; onSubmit()"
+      class="px-4 py-2 rounded cursor-pointer hover:scale-105 transition-all duration-300"
     >
-      Procedi con l'acquisto
+      Acquista
     </button>
   </form>
 </section>

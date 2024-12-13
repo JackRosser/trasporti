@@ -1,8 +1,7 @@
 import { Component } from '@angular/core';
-import { iRivenditore } from '../../interfaces/i-rivenditore';
-import { RivenditoriService } from '../../services/rivenditori.service';
-import { iRivAutomatico } from '../../interfaces/i-riv-automatico';
-import { iRivFisico } from '../../interfaces/i-riv-fisico';
+import { RivenditoriService } from '../../../services/rivenditori.service';
+import { iRivFisico } from '../../../interfaces/i-riv-fisico';
+import { iRivAutomatico } from '../../../interfaces/i-riv-automatico';
 
 @Component({
   selector: 'app-insert-rivenditori',
