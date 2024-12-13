@@ -3,6 +3,9 @@ import { MezziService } from '../../../services/mezzi.service';
 import { iVeicolo } from '../../../interfaces/frontend/i-veicolo';
 import { iMezzo } from '../../../interfaces/i-mezzo';
 import { environment } from '../../../../environments/environment.development';
+import { TratteService } from '../../../services/tratte.service';
+import { StatomezzoService } from '../../../services/statomezzo.service';
+import { iTratta } from '../../../interfaces/i-tratta';
 
 @Component({
   selector: 'app-mezzi',
@@ -19,7 +22,11 @@ export class MezziComponent implements OnInit {
   buttonClassTram: string =
     'bg-white p-2 rounded-md hover:bg-blue-500 hover:text-white';
 
-  constructor(private mezziSvc: MezziService) {}
+  constructor(
+    private tratteSvc: TratteService,
+    private mezziSvc: MezziService,
+    private statoMezziSvc: StatomezzoService
+  ) {}
 
   changeInActiveTram(): void {
     this.buttonClassBus =
@@ -57,5 +64,32 @@ export class MezziComponent implements OnInit {
         this.randomIndexTram.push(randomNumTram);
       }
     });
+  }
+
+  public mettiInServizio(mezzo: iMezzo, tratta: iTratta) {
+    this.statoMezziSvc
+      .createServizio(mezzo.id, tratta.id)
+      .pipe((res) => {
+        console.log('siamo qua');
+        console.log(res);
+
+        return res;
+      })
+      .subscribe((res) => {
+        console.log('SIamoqua');
+      });
+  }
+  public mettiInManutenzione(mezzo: iMezzo) {
+    this.statoMezziSvc
+      .createManutenzione(mezzo.id, 'Cambio gomme')
+      .pipe((res) => {
+        console.log('siamo qua');
+        console.log(res);
+
+        return res;
+      })
+      .subscribe((res) => {
+        console.log('SIamoqua');
+      });
   }
 }

@@ -25,14 +25,9 @@ export class StatomezzoService {
       tipo: 'servizio',
     });
   }
-  public createManutenzione(
-    mezzoid: number,
-    trattaid: number,
-    descrizione: string
-  ) {
+  public createManutenzione(mezzoid: number, descrizione: string) {
     return this.http.post<iStatoMezzo>(this.statoMezziUrl, {
       mezzoId: mezzoid,
-      trattaId: trattaid,
       descrizione: descrizione,
       tipo: 'manutenzione',
     });

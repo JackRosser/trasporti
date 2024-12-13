@@ -44,7 +44,7 @@ export class TestCipoComponent {
   }
   public mettiInManutenzione() {
     this.statoMezziSvc
-      .createManutenzione(this.mezzo1.id, this.tratta.id, 'Cambio gomme')
+      .createManutenzione(this.mezzo1.id, 'Cambio gomme')
       .pipe((res) => {
         console.log('siamo qua');
         console.log(res);
