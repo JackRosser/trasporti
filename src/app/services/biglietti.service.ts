@@ -70,8 +70,11 @@ export class BigliettiService {
     return this.http.delete(`${this.bigliettiUrl}/${id}`);
   }
 
-  public creaGiornalierio(rivenditoreId: number, trattaId: number) {
-    return this.http.post(`${this.bigliettiUrl}`, {
+  public creaGiornalierio(
+    rivenditoreId: number,
+    trattaId: number
+  ): Observable<iGiornaliero> {
+    return this.http.post<iGiornaliero>(`${this.bigliettiUrl}`, {
       rivenditoreId: rivenditoreId,
       trattaId: trattaId,
       tipo: 'Giornaliero',
