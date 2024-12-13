@@ -28,246 +28,63 @@ export class TestComponent {
     private bigliettiSvc: BigliettiService
   ) {}
 
-  tratte!: iTratta[];
-  rivenditori!: iRivenditore[];
-  mezzi!: iMezzo[];
-
-  mezzo!: iMezzo;
-  tratta: Partial<iTratta> = {
-    partenza: 'Prova partenza',
-    capolinea: 'Prova capolinea',
-    durata: '00:30',
-    percorrenze: [],
-  };
-
-  tratta2!: iTratta;
-
-  rivFisico: Partial<iRivFisico> = {
-    giornoChiusura: 1,
-    oraApertura: '10:00:00',
-    oraChiusura: '20:00:00',
-    tipo: 'RivFisico',
-  };
-
-  rivenditoreById!: iRivenditore;
-  rivenditoreById2!: iRivenditore;
-
-  utenteById1!: iUtente;
-
-  newUtente: Partial<iUtente> = {
-    nome: 'Mario',
-    cognome: 'Rossi',
-    email: 'mario.rossi@example.com',
-    dataNascita: '1990-03-01',
-    tessera: null,
-    ruolo: 'utente',
-  };
-
-  tesseraRinnovo!: iTessera;
-
   ngOnInit() {
-    // test getTratte
-    this.tratteSvc.getTratte().subscribe((res) => {
-      console.log(res);
-    });
+    // get tutte le tratte
+    // this.tratteSvc.getTratte().subscribe((res) => console.log('Tratte', res));
 
-    // test getTrattaById
-    this.tratteSvc.getTrattaById(1).subscribe((res) => {
-      if (res) {
-        this.tratta2 = res;
-        console.log(this.tratta2);
-        this.tratta2.capolinea = 'Prova modifica';
-      }
-    });
+    // get tratta per id
+    this.tratteSvc.getTrattaById(2);
+    // .subscribe((res) => console.log('tratta per id', res));
 
-    // test getRivenditori
-    this.rivenditoriSvc.getRivenditori().subscribe((res) => {
-      if (res) this.rivenditori = res;
-      console.log(this.rivenditori);
-    });
+    // inserimento nuova tratta
+    // let nuovaTratta: Partial<iTratta> = {
+    //   capolinea: 'prova capolinea',
+    //   partenza: 'prova partenza',
+    //   durata: '00:45:00',
+    // };
+    // this.tratteSvc
+    //   .createTratta(nuovaTratta)
+    //   .subscribe((res) => console.log('Tratta creata', res));
 
-    // rivenditore fisico
-    this.rivenditoriSvc.getRivenditoreById(164).subscribe((res) => {
-      if (res) this.rivenditoreById = res;
-      console.log(this.rivenditoreById);
-    });
+    // get tutti i mezzi
+    // this.mezziSvc.getMezzi().subscribe((res) => console.log('Mezzi', res));
 
-    // rivenditore automatico
-    this.rivenditoriSvc.getRivenditoreById(155).subscribe((res) => {
-      if (res) this.rivenditoreById2 = res;
-      console.log(this.rivenditoreById2);
-    });
+    // get mezzo per id
+    // this.mezziSvc
+    //   .getMezzoById(1)
+    //   .subscribe((res) => console.log('mezzo per id', res));
 
-    // test getRivFisici
-    this.rivenditoriSvc.getRivFisici().subscribe((res) => console.log(res));
+    // insert mezzo
+    // this.mezziSvc
+    //   .createMezzo('tram', 170)
+    //   .subscribe((res) => console.log('tram creato ', res));
 
-    // test getRivAutomatici
-    this.rivenditoriSvc.getRivAutomatici().subscribe((res) => console.log(res));
+    // get tutti i rivenditori
+    // this.rivenditoriSvc
+    //   .getRivenditori()
+    //   .subscribe((res) => console.log('Rivenditori', res));
 
-    // testgetMezzi
-    this.mezziSvc.getMezzi().subscribe((res) => console.log(res));
+    // get rivenditore per id
+    // this.rivenditoriSvc
+    //   .getRivenditoreById(154)
+    //   .subscribe((res) => console.log('rivenditore per id', res));
+    // this.rivenditoriSvc
+    //   .getRivenditoreById(155)
+    //   .subscribe((res) => console.log('rivenditore per id', res));
 
-    // test getMezzoById
-    this.mezziSvc.getMezzoById(1).subscribe((res) => {
-      this.mezzo = res;
-      console.log(res);
-    });
+    // crea rivenditore fisico
+    let rivFisico: Partial<iRivFisico> = {
+      giornoChiusura: 2,
+      oraApertura: '10:00:00',
+      oraChiusura: '18:00:00',
+      tipo: 'RivFisico',
+    };
+    this.rivenditoriSvc
+      .createRivenditoreFisico(rivFisico)
+      .subscribe((res) => console.log('rivFisico creato', res));
 
-    // test getUtenti
-    this.utentiSvc.getUtenti().subscribe((res) => console.log(res));
-
-    // test getUtenteById
-    this.utentiSvc.getUtenteById(57).subscribe((res) => {
-      if (res) this.utenteById1 = res;
-      console.log(this.utenteById1);
-
-      // getTesseraByUtente
-      this.tessereSvc
-        .getTesseraByUtente(this.utenteById1)
-        .subscribe((res) => console.log('tessera utente', res));
-    });
-
-    // test geet tessere
-    this.tessereSvc.getTessere().subscribe((res) => console.log(res));
-
-    // test tessera per codice
-    this.tessereSvc.getTesseraByCodice('T-HSOJVAVDQY').subscribe((res) => {
-      if (res) {
-        this.tesseraRinnovo = res;
-        console.log('tessera per codice', res);
-        // test abbonamenti per tessera
-        // this.bigliettiSvc
-        //   .getAbbonamentiByTessera(this.tesseraRinnovo)
-        //   .subscribe((res) => console.log('abbonamenti per tessera:', res));
-      }
-    });
-
-    // test get biglietti
-    this.bigliettiSvc.getBiglietti().subscribe((res) => console.log(res));
-
-    // get biglietti giornalieri
-    this.bigliettiSvc.getGiornalieri().subscribe((res) => console.log(res));
-
-    // get biglietti abbonamenti
-    this.bigliettiSvc.getAbbonamenti().subscribe((res) => console.log(res));
-
-    // get biglietto byId
-    this.bigliettiSvc
-      .getGiornalieroById(102)
-      .subscribe((res) => console.log('Giornaliero per id', res));
-
-    // get abbonamento byId
-    this.bigliettiSvc
-      .getAbbonamentoById(205)
-      .subscribe((res) => console.log('Abbonamento per id', res));
-  }
-
-  inserisciTratta() {
-    // test postTratta
-    this.tratteSvc.createTratta(this.tratta).subscribe();
-  }
-
-  modificaTratta() {
-    this.tratteSvc.updateTratta(this.tratta2).subscribe();
-  }
-
-  cancellaTratta() {
-    this.tratteSvc.deleteTratta(103).subscribe();
-  }
-
-  // // test createRivenditoreFisico
-  creaRivenditoreFisico() {
-    this.rivenditoriSvc.createRivenditoreFisico(this.rivFisico).subscribe();
-  }
-
-  // // test creaRivenditoreAutomatico
-  creaRivenditoreAutomatico() {
-    this.rivenditoriSvc.createRivenditoreAutomatico().subscribe();
-  }
-
-  modificaRivenditoreAutomatico() {
-    let riv: iRivAutomatico = this.rivenditoreById2 as iRivAutomatico;
-    riv.attivo = false;
-    this.rivenditoriSvc.updateRivAutomatico(riv).subscribe();
-  }
-
-  modificaRivenditoreFisico() {
-    let riv: iRivFisico = this.rivenditoreById as iRivFisico;
-    riv.giornoChiusura = 1;
-    this.rivenditoriSvc.updateRivFisico(riv).subscribe();
-  }
-
-  cancellaRivenditore() {
-    this.rivenditoriSvc.deleteRivenditore(52).subscribe();
-  }
-
-  // test crea mezzo
-  creaMezzo() {
-    this.mezziSvc.createMezzo('tram', 666).subscribe();
-  }
-
-  // test delete mezzo
-  cancellaMezzo() {
-    this.mezziSvc.deleteMezzo(103).subscribe();
-  }
-
-  modificaMezzo() {
-    this.mezzo.codice = 1000;
-    this.mezziSvc.updateMezzo(this.mezzo).subscribe();
-  }
-
-  // test creautente
-  creaUtente() {
-    this.utentiSvc.createUtente(this.newUtente).subscribe();
-  }
-
-  // test modifica utente
-  modificaUtente() {
-    this.utenteById1.cognome = 'Biondi';
-    this.utentiSvc.updateUtente(this.utenteById1).subscribe();
-  }
-
-  // test cancella utente
-  cancellaUtente() {
-    this.utentiSvc.deleteUtente(70).subscribe();
-  }
-
-  // test createssera
-  createssera() {
-    this.tessereSvc
-      .createTessera(this.rivenditoreById.id, this.utenteById1.id)
-      .subscribe();
-  }
-
-  // test rinnovatessera
-  rinnovatessera() {
-    this.tessereSvc.rinnovaTessera(this.tesseraRinnovo).subscribe();
-  }
-
-  // test deletetessera
-  cancellatessera() {
-    this.tessereSvc.deleteTessera(this.tesseraRinnovo.id).subscribe();
-  }
-
-  cancellaBiglietto() {
-    this.bigliettiSvc.deleteBiglietto(211).subscribe();
-  }
-
-  creaGiornaliero() {
-    if (this.rivenditoreById.id && this.tratta2.id) {
-      this.bigliettiSvc
-        .creaGiornalierio(this.rivenditoreById.id, this.tratta2.id)
-        .subscribe();
-    }
-  }
-
-  creaAbbonamento() {
-    if (
-      this.rivenditoreById.id &&
-      this.tesseraRinnovo.id &&
-      this.utenteById1.id
-    ) {
-      this.bigliettiSvc.creaAbbonamento(152, 52, 'mensile').subscribe();
-    }
+    this.rivenditoriSvc
+      .createRivenditoreAutomatico()
+      .subscribe((res) => console.log('riv automatico creato ', res));
   }
 }
