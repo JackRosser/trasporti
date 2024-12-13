@@ -34,10 +34,8 @@ export class TestComponent {
   ngOnInit() {
     // get tutte le tratte
     // this.tratteSvc.getTratte().subscribe((res) => console.log('Tratte', res));
-
     // get tratta per id
     // this.tratteSvc.getTrattaById(2).subscribe((res) => (this.tratta = res));
-
     // inserimento nuova tratta
     // let nuovaTratta: Partial<iTratta> = {
     //   capolinea: 'prova capolinea',
@@ -47,25 +45,20 @@ export class TestComponent {
     // this.tratteSvc
     //   .createTratta(nuovaTratta)
     //   .subscribe((res) => console.log('Tratta creata', res));
-
     // get tutti i mezzi
     // this.mezziSvc.getMezzi().subscribe((res) => console.log('Mezzi', res));
-
     // get mezzo per id
     // this.mezziSvc
     //   .getMezzoById(1)
     //   .subscribe((res) => console.log('mezzo per id', res));
-
     // insert mezzo
     // this.mezziSvc
     //   .createMezzo('tram', 170)
     //   .subscribe((res) => console.log('tram creato ', res));
-
     // get tutti i rivenditori
     // this.rivenditoriSvc
     //   .getRivenditori()
     //   .subscribe((res) => console.log('Rivenditori', res));
-
     // get rivenditore per id
     // this.rivenditoriSvc
     //   .getRivenditoreById(154)
@@ -73,7 +66,6 @@ export class TestComponent {
     // this.rivenditoriSvc
     //   .getRivenditoreById(155)
     //   .subscribe((res) => (this.rivenditore = res));
-
     // crea rivenditore fisico
     // let rivFisico: Partial<iRivFisico> = {
     //   giornoChiusura: 2,
@@ -84,11 +76,9 @@ export class TestComponent {
     // this.rivenditoriSvc
     //   .createRivenditoreFisico(rivFisico)
     //   .subscribe((res) => console.log('rivFisico creato', res));
-
     // this.rivenditoriSvc
     //   .createRivenditoreAutomatico()
     //   .subscribe((res) => console.log('riv automatico creato ', res));
-
     // get tutti biglietti
     // this.bigliettiSvc
     //   .getBiglietti()
@@ -100,12 +90,13 @@ export class TestComponent {
     //   .getGiornalieri()
     //   .subscribe((res) => console.log('tutti giornalieri ', res));
     // insert giornaliero
-
-    this.bigliettiSvc.convalidaBiglietto(1652).subscribe({
-      next: (res) =>
-        alert(`Biglietto convalidato: ${res.codice} ${res.scadenza}`),
-      error: (res) => alert('Errore nella richiesta!'),
-    });
+    // this.bigliettiSvc.convalidaBiglietto(1652).subscribe({
+    //   next: (res) =>
+    //     alert(
+    //       `Biglietto convalidato: ${res.codice} - Valido fino a ${res.scadenza}`
+    //     ),
+    //   error: (res) => alert('Errore nella richiesta!'),
+    // });
   }
 
   // creaGiornaliero() {
