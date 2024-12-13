@@ -53,7 +53,9 @@ export class UtenteComponent {
   submit() {
     this.utentiSvc.createUtente(this.utente).subscribe({
       next: (res) => {
-        alert('Utente creato con successo!');
+        alert(
+          `Utente creato con successo! Nome: ${res.nome} Cognome: ${res.cognome} Email: ${res.email}`
+        );
       },
       error: (err) => {
         alert('Errore nella richiesta');
