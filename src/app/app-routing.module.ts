@@ -1,16 +1,29 @@
 import { NgModule } from '@angular/core';
-import { RouterModule, Routes } from '@angular/router';
+import {
+  RouterModule,
+  Routes,
+  ActivatedRoute,
+  CanActivate,
+} from '@angular/router';
 import { TestComponent } from './test_adri/test/test.component';
+import { LoginGuard } from './guards/login.guard';
+import { AdminGuard } from './guards/admin.guard';
+import { UtenteGuard } from './guards/utente.guard';
 
 const routes: Routes = [
-  { path: '', redirectTo: 'home', pathMatch: 'full' },
+  {
+    path: '',
+    loadChildren: () =>
+      import('./pages/intro/intro.module').then((m) => m.IntroModule),
+  },
   {
     path: 'home',
     loadChildren: () =>
       import('./pages/home/home.module').then((m) => m.HomeModule),
+    canActivate: [LoginGuard],
   },
   {
-    path: 'bus',
+    path: 'giornaliero',
     loadChildren: () =>
       import('./pages/bus/bus.module').then((m) => m.BusModule),
   },
@@ -25,27 +38,24 @@ const routes: Routes = [
       import('./pages/abbonamento/abbonamento.module').then(
         (m) => m.AbbonamentoModule
       ),
+    canActivate: [LoginGuard, UtenteGuard],
   },
-  {
-    path: 'rivenditori',
-    loadChildren: () =>
-      import('./pages/insert-rivenditori/insert-rivenditori.module').then(
-        (m) => m.InsertRivenditoriModule
-      ),
-  },
-  {
-    path: 'mezzi',
-    loadChildren: () =>
-      import('./pages/mezzi/mezzi.module').then((m) => m.MezziModule),
-  },
+
   {
     path: 'user',
     loadChildren: () =>
       import('./pages/user/user.module').then((m) => m.UserModule),
+    canActivate: [LoginGuard, UtenteGuard],
   },
   { path: 'test', component: TestComponent },
-  { path: 'inserimentoMezzi', loadChildren: () => import('./pages/inserimento-mezzi/inserimento-mezzi.module').then(m => m.InserimentoMezziModule) },
-  { path: 'insert-tratta', loadChildren: () => import('./pages/insert-tratta/insert-tratta.module').then(m => m.InsertTrattaModule) },
+  {
+    path: 'backoffice',
+    loadChildren: () =>
+      import('./pages/backoffice/backoffice.module').then(
+        (m) => m.BackofficeModule
+      ),
+    canActivate: [LoginGuard, AdminGuard],
+  },
 ];
 
 @NgModule({

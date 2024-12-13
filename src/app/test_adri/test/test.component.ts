@@ -248,4 +248,26 @@ export class TestComponent {
   cancellatessera() {
     this.tessereSvc.deleteTessera(this.tesseraRinnovo.id).subscribe();
   }
+
+  cancellaBiglietto() {
+    this.bigliettiSvc.deleteBiglietto(211).subscribe();
+  }
+
+  creaGiornaliero() {
+    if (this.rivenditoreById.id && this.tratta2.id) {
+      this.bigliettiSvc
+        .creaGiornalierio(this.rivenditoreById.id, this.tratta2.id)
+        .subscribe();
+    }
+  }
+
+  creaAbbonamento() {
+    if (
+      this.rivenditoreById.id &&
+      this.tesseraRinnovo.id &&
+      this.utenteById1.id
+    ) {
+      this.bigliettiSvc.creaAbbonamento(152, 52, 'mensile').subscribe();
+    }
+  }
 }

@@ -1,0 +1,8 @@
+<ng-container>
+  <select name="utente" id="utente" (change)="conferma($event)">
+    <option value="">-- scegli un utente --</option>
+    <option *ngFor="let utente of utenti" [value]="utente.id">
+      {{ utente.nome }} {{ utente.cognome }}
+    </option>
+  </select>
+</ng-container>
