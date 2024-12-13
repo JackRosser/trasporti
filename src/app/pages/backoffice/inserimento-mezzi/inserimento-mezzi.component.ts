@@ -1,7 +1,7 @@
 import { Component, OnInit } from '@angular/core';
-import { MezziService } from '../../services/mezzi.service';
-import { iMezzo } from '../../interfaces/i-mezzo';
-import { eStato } from '../../interfaces/e-stato';
+import { MezziService } from '../../../services/mezzi.service';
+import { iMezzo } from '../../../interfaces/i-mezzo';
+import { eStato } from '../../../interfaces/e-stato';
 
 @Component({
   selector: 'app-inserimento-mezzi',

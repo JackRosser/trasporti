@@ -1,6 +1,6 @@
 import { Component } from '@angular/core';
-import { TratteService } from '../../services/tratte.service';
-import { iTratta } from '../../interfaces/i-tratta';
+import { TratteService } from '../../../services/tratte.service';
+import { iTratta } from '../../../interfaces/i-tratta';
 
 @Component({
   selector: 'app-insert-tratta',

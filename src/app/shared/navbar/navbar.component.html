@@ -2,7 +2,7 @@
   class="text-white bg-[#012F45] py-1 pr-3 md:pr-5 text-center flex items-center justify-between fixed w-full top-0 z-30"
 >
   <!-- 88px -->
-  <div
+  <!-- <div
     *ngIf="toggleBackoffice"
     class="absolute top-[88px] left-0 z-50 bg-[#012F45] text-white w-full py-2 flex flex-col gap-2 backoffice"
   >
@@ -30,16 +30,22 @@
       class="hover:bg-white hover:text-[#012F45]"
       >Inserisci mezzi</a
     >
-  </div>
+  </div> -->
   <div
     class="flex justify-start items-center gap-5 w-full lg:justify-center lg:gap-20"
   >
-    <img src="/img/Logo.png" alt="logo" class="max-h-[5rem] rounded-full" />
-    <a [routerLink]="'/home'" class="cursor-pointer hover:text-[#F10120]"
+    <a [routerLink]="'/'"
+      ><img src="/img/Logo.png" alt="logo" class="max-h-[5rem] rounded-full"
+    /></a>
+    <a
+      *ngIf="utente"
+      [routerLink]="'/home'"
+      class="cursor-pointer hover:text-[#F10120]"
       >Home</a
     >
 
     <a
+      *ngIf="utente && utente.ruolo === 'admin'"
       [routerLink]="'/backoffice'"
       class="cursor-pointer hover:text-[#F10120]"
       (click)="activateToggle()"
@@ -48,6 +54,7 @@
   </div>
 
   <a
+    *ngIf="utente && utente.ruolo === 'utente'"
     [routerLink]="'/user'"
     class="cursor-pointer hover:bg-white hover:text-[#012F45] rounded-full border"
     ><svg

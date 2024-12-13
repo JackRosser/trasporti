@@ -25,6 +25,7 @@
   <h3 class="text-center pt-32 pb-5 text-3xl">Registra un nuovo utente</h3>
   <section class="bg-slate-300 w-full flex justify-center items-center">
     <form
+      (submit)="submit()"
       #utenteForm="ngForm"
       class="p-4 flex flex-col text-center border justify-center items-center shadow-md mt-[12rem] lg:mt-0 md:mt-[7rem]"
     >
@@ -70,7 +71,7 @@
       <!-- Orari -->
       <div class="mb-4">
         <label for="email" class="block text-sm font-medium mb-3 text-[1.5rem]">
-          Orari
+          Email
         </label>
         <input
           type="text"

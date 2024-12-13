@@ -63,7 +63,13 @@ export class UserComponent implements OnInit {
     if (this.utente) {
       this.tessereSvc
         .createTessera(this.rivenditori[random].id, this.utente.id)
-        .subscribe((res) => this.utentiService.loggedUser$.next(this.utente));
+        .subscribe({
+          next: (res) => {
+            alert('Tessera generata con successo!');
+            this.utentiService.loggedUser$.next(this.utente);
+          },
+          error: (err) => alert('Errore nella richiesta!'),
+        });
     }
   }
 }

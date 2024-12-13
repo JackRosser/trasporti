@@ -12,7 +12,13 @@ export class UtenteComponent {
   constructor(private utentiSvc: UtentiService, private router: Router) {}
 
   utenti!: iUtente[];
-  utente!: Partial<iUtente> | iUtente;
+  utente: Partial<iUtente> | iUtente = {
+    nome: '',
+    cognome: '',
+    email: '',
+    dataNascita: '',
+    ruolo: 'utente',
+  };
 
   showChoise: boolean = true;
   showCrea: boolean = false;
@@ -42,5 +48,16 @@ export class UtenteComponent {
     let utente: iUtente = this.utenti.find((u) => u.id === id) as iUtente;
     this.utentiSvc.loggedUser$.next(utente);
     this.router.navigate(['/user']);
+  }
+
+  submit() {
+    this.utentiSvc.createUtente(this.utente).subscribe({
+      next: (res) => {
+        alert('Utente creato con successo!');
+      },
+      error: (err) => {
+        alert('Errore nella richiesta');
+      },
+    });
   }
 }

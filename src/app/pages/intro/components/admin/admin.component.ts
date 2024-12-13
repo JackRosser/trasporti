@@ -27,6 +27,6 @@ export class AdminComponent {
     let id = +(event.target as HTMLSelectElement).value;
     let utente: iUtente = this.utenti.find((u) => u.id === id) as iUtente;
     this.utentiSvc.loggedUser$.next(utente);
-    // this.router.navigate(['/user']); // fare pagina backoffice con pulsanti di scelta
+    this.router.navigate(['/backoffice']);
   }
 }
