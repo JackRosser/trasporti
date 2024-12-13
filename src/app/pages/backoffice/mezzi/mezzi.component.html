@@ -1,28 +1,49 @@
-<div *ngIf="bus.length > 0 && tram.length > 0" class="mt-2 ml-2 flex gap-2">
-  <button (click)="changeInActiveBus()" [class]="buttonClassBus">
+<div
+  *ngIf="bus.length > 0 && tram.length > 0"
+  class="mt-2 ml-2 flex gap-2 justify-center"
+>
+  <button (click)="changeInActiveBus()" [class]="buttonClassBus" class="btn">
     Autobus
   </button>
-  <button (click)="changeInActiveTram()" [class]="buttonClassTram">Tram</button>
+  <button (click)="changeInActiveTram()" [class]="buttonClassTram" class="btn">
+    Tram
+  </button>
 </div>
 <section class="p-2">
-  <div *ngIf="toggleBus" class="grid grid-cols-3 gap-2 text-center">
-    <div *ngFor="let mezzo of bus; let i = index">
+  <div
+    *ngIf="toggleBus"
+    class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-4 text-center"
+  >
+    <div *ngFor="let mezzo of bus; let i = index" class="card">
       <img
         [src]="busList[randomIndexBus[i]]"
-        class="cursor-pointer hover:brightness-125"
+        class="cursor-pointer hover:brightness-125 rounded-t-lg"
       />
-      {{ mezzo.codice }}
+      <div class="p-4">
+        <h3 class="text-lg font-semibold">{{ mezzo.codice }}</h3>
+        <button class="btn btn-primary mt-2">MANDA IN MANUTENZIONE</button>
+        <button class="btn btn-secondary mt-2">MANDA IN DEPOSITO</button>
+        <button class="btn btn-success mt-2">METTI IN SERVIZIO</button>
+      </div>
     </div>
   </div>
 </section>
 <section class="p-2">
-  <div *ngIf="toggleTram" class="grid grid-cols-3 gap-2 text-center">
-    <div *ngFor="let mezzo of tram; let i = index">
+  <div
+    *ngIf="toggleTram"
+    class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-4 text-center"
+  >
+    <div *ngFor="let mezzo of tram; let i = index" class="card">
       <img
         [src]="tramList[randomIndexTram[i]]"
-        class="cursor-pointer hover:brightness-125"
+        class="cursor-pointer hover:brightness-125 rounded-t-lg"
       />
-      {{ mezzo.codice }}
+      <div class="p-4">
+        <h3 class="text-lg font-semibold">{{ mezzo.codice }}</h3>
+        <button class="btn btn-primary mt-2">MANDA IN MANUTENZIONE</button>
+        <button class="btn btn-secondary mt-2">MANDA IN DEPOSITO</button>
+        <button class="btn btn-success mt-2">METTI IN SERVIZIO</button>
+      </div>
     </div>
   </div>
 </section>

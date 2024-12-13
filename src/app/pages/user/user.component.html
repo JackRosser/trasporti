@@ -1,44 +1,56 @@
-<div>
-  <h3 class="text-[40px]">Utente: {{ utente.nome }} {{ utente.cognome }}</h3>
+<div class="relative bg-gray-100 min-h-screen">
+  <!-- Sezione Dati Utente -->
+  <div class="absolute top-10 left-10 bg-white p-6 rounded-lg shadow-lg">
+    <h3 class="text-2xl font-bold text-gray-800 mb-4">
+      Utente: {{ utente.nome }} {{ utente.cognome }}
+    </h3>
+    <ul class="text-gray-600">
+      <li><strong>Nome:</strong> {{ utente.nome }}</li>
+      <li><strong>Cognome:</strong> {{ utente.cognome }}</li>
+      <li><strong>Data di nascita:</strong> {{ utente.dataNascita | date }}</li>
+      <li><strong>Email:</strong> {{ utente.email }}</li>
+    </ul>
+    <h4 class="text-lg font-semibold text-gray-700 mt-4">Tipo di tessera</h4>
+    <p *ngIf="tessera" class="text-blue-600">
+      Tessera: {{ tessera.codice }} (Validità: {{ tessera.validita | date }})
+    </p>
+  </div>
 
-  <ul>
-    <li>Nome: {{ utente.nome }}</li>
-    <li>Cognome: {{ utente.cognome }}</li>
-    <li>Data di nascita: {{ utente.dataNascita | date }}</li>
-    <li>Email: {{ utente.email }}</li>
-  </ul>
-
-  <h4>Tipo di tessera</h4>
-
-  <p *ngIf="tessera">
-    Tessera: {{ tessera.codice }} (Validità: {{ tessera.validita | date }})
-  </p>
-
-  <div class="text-center" *ngIf="!tessera">
-    <h5 class="text-3xl">
-      Richiedi la tua tessera per acquistare fantastici abbonamenti!
-    </h5>
-    <img
-      class="rounded-xl"
-      src="https://hatchgreencoaches.co.uk/mobile/images/travel-card/bus-travel-card-taunton.jpg"
-      alt="Tessera"
-    />
-    <select name="rivenditore" id="rivenditore" [(ngModel)]="rivenditoreId">
-      <option value="">-- seleziona rivenditore --</option>
-      <option
-        value=""
-        *ngFor="let rivenditore of rivenditori"
-        [value]="rivenditore.id"
+  <!-- Sezione Tessera -->
+  <div class="flex flex-col items-center justify-center min-h-screen">
+    <div class="text-center">
+      <h5 class="text-3xl font-semibold text-gray-800 mb-4" *ngIf="!tessera">
+        Richiedi la tua tessera per acquistare fantastici abbonamenti!
+      </h5>
+      <img
+        class="rounded-xl shadow-lg hover:scale-105 transition-transform duration-300"
+        src="https://hatchgreencoaches.co.uk/mobile/images/travel-card/bus-travel-card-taunton.jpg"
+        alt="Tessera"
+      />
+      <div class="mt-6">
+        <select
+          name="rivenditore"
+          id="rivenditore"
+          [(ngModel)]="rivenditoreId"
+          class="w-80 px-4 py-2 text-center text-gray-700 bg-blue-100 border border-blue-400 rounded-lg shadow focus:outline-none focus:ring-2 focus:ring-blue-500 focus:border-transparent"
+        >
+          <option value="">-- seleziona rivenditore --</option>
+          <option
+            value=""
+            *ngFor="let rivenditore of rivenditori"
+            [value]="rivenditore.id"
+          >
+            {{ rivenditore | json }}
+          </option>
+        </select>
+      </div>
+      <button
+        type="button"
+        (click)="generaTessera()"
+        class="mt-6 bg-gradient-to-r from-blue-400 via-blue-500 to-blue-600 text-white px-6 py-3 rounded-lg shadow-lg hover:scale-105 hover:shadow-xl transition-transform duration-300"
       >
-        {{ rivenditore | json }}
-      </option>
-    </select>
-    <button
-      type="button"
-      (click)="generaTessera()"
-      class="bg-blue-500 text-white px-4 py-2 rounded cursor-pointer hover:scale-110 hover:text-blue-500 hover:bg-white transition-all duration-300 mt-5"
-    >
-      Richiedi
-    </button>
+        Richiedi Tessera
+      </button>
+    </div>
   </div>
 </div>
