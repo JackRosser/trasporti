@@ -96,4 +96,10 @@ export class BigliettiService {
       utenteId: utenteId,
     });
   }
+
+  convalidaBiglietto(bigliettoId: number): Observable<iBiglietto> {
+    return this.http.put<iBiglietto>(`${this.bigliettiUrl}/${bigliettoId}`, {
+      bigliettoId: bigliettoId,
+    });
+  }
 }

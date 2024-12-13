@@ -1,3 +1,4 @@
+import { BigliettiService } from './../../services/biglietti.service';
 import { Component } from '@angular/core';
 import { TratteService } from '../../services/tratte.service';
 import { iTratta } from '../../interfaces/i-tratta';
@@ -11,7 +12,6 @@ import { UtentiService } from '../../services/utenti.service';
 import { iUtente } from '../../interfaces/i-utente';
 import { TessereService } from '../../services/tessere.service';
 import { iTessera } from '../../interfaces/i-tessera';
-import { BigliettiService } from '../../services/biglietti.service';
 
 @Component({
   selector: 'app-test',
@@ -36,7 +36,7 @@ export class TestComponent {
     // this.tratteSvc.getTratte().subscribe((res) => console.log('Tratte', res));
 
     // get tratta per id
-    this.tratteSvc.getTrattaById(2).subscribe((res) => (this.tratta = res));
+    // this.tratteSvc.getTrattaById(2).subscribe((res) => (this.tratta = res));
 
     // inserimento nuova tratta
     // let nuovaTratta: Partial<iTratta> = {
@@ -70,9 +70,9 @@ export class TestComponent {
     // this.rivenditoriSvc
     //   .getRivenditoreById(154)
     //   .subscribe((res) => console.log('rivenditore per id', res));
-    this.rivenditoriSvc
-      .getRivenditoreById(155)
-      .subscribe((res) => (this.rivenditore = res));
+    // this.rivenditoriSvc
+    //   .getRivenditoreById(155)
+    //   .subscribe((res) => (this.rivenditore = res));
 
     // crea rivenditore fisico
     // let rivFisico: Partial<iRivFisico> = {
@@ -100,6 +100,12 @@ export class TestComponent {
     //   .getGiornalieri()
     //   .subscribe((res) => console.log('tutti giornalieri ', res));
     // insert giornaliero
+
+    this.bigliettiSvc.convalidaBiglietto(1652).subscribe({
+      next: (res) =>
+        alert(`Biglietto convalidato: ${res.codice} ${res.scadenza}`),
+      error: (res) => alert('Errore nella richiesta!'),
+    });
   }
 
   // creaGiornaliero() {
